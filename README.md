@@ -127,6 +127,11 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     import streaming_pb2
     import streaming_pb2_grpc
     
+    # --- 헬스 체크를 위한 추가 import ---
+    from grpc_health.v1 import health
+    from grpc_health.v1 import health_pb2
+    from grpc_health.v1 import health_pb2_grpc
+    
     logging.basicConfig(level=logging.INFO)
     
     # 1. OpenTelemetry 메트릭 설정
@@ -163,6 +168,16 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
         streaming_pb2_grpc.add_StreamerServicer_to_server(StreamerService(), server)
+    
+        # --- 헬스 체크 서비스 설정 및 추가 ---
+        health_servicer = health.HealthServicer()
+        health_pb2_grpc.add_HealthServicer_to_server(health_servicer, server)
+        
+        # 전체 서버의 기본 상태를 SERVING으로 설정합니다.
+        # 특정 서비스별로 상태를 다르게 설정할 수도 있습니다.
+        health_servicer.set("", health_pb2.HealthCheckResponse.SERVING)
+        # ------------------------------------
+    
         server.add_insecure_port("[::]:50051")
         server.start()
         logging.info("gRPC server started on port 50051.")
@@ -181,6 +196,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     opentelemetry-instrumentation-grpc
     opentelemetry-exporter-prometheus
     prometheus-client
+    grpcio-health-checking  # grpc health check 기능을 제공하는 라이브러리
     ```
 5.  **Python용 가상환경 설정:**
     ```bash
@@ -355,38 +371,60 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
 2.  **GKE 배포 매니페스트 (`application.yaml`):**
     *   `~/grpc-hpa-test/k8s/application.yaml` 파일을 아래 내용으로 작성합니다.
     ```yaml
-    # 1. 애플리케이션을 위한 Namespace (istio-injection 레이블 제거)
+    # 1. 애플리케이션을 위한 Namespace
     apiVersion: v1
     kind: Namespace
     metadata:
       name: grpc-test
     ---
-    # 2. BackendConfig: GCLB가 gRPC 백엔드를 올바르게 인식하도록 설정
-    # gRPC 헬스체크를 사용하도록 정의합니다.
-    apiVersion: cloud.google.com/v1
-    kind: BackendConfig
+    # 2. HealthCheckPolicy: Gateway API를 위한 상태 확인 설정 리소스
+    # "상태 확인은 GRPC로 하라"고 명시
+    # https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_health_check
+    apiVersion: networking.gke.io/v1
+    kind: HealthCheckPolicy
     metadata:
-      name: vac-hub-backend-config
+      name: vac-hub-grpc-health-check-policy
       namespace: grpc-test
     spec:
-      healthCheck:
-        type: GRPC
-        port: 50051 # gRPC 서버 포트
-        requestPath: /grpc.health.v1.Health/Check # gRPC 헬스체크 표준 경로
+      # 이 정책이 적용될 대상을 명시적으로 지정합니다.
+      targetRef:
+        group: ""
+        kind: Service
+        name: vac-hub-test-svc
+      default:
+        config:
+          type: 'GRPC'
+          grpcHealthCheck:
+            port: 50051
     ---
-    # 3. 애플리케이션 Service (ClusterIP)
-    # GCLB가 Pod를 직접 타겟팅(NEG)하고 BackendConfig를 사용하도록 annotation을 추가합니다.
+    # 3. GCPBackendPolicy: "클라이언트 연결 후 10분간 데이터가 없어도 끊지 마"
+    apiVersion: networking.gke.io/v1
+    kind: GCPBackendPolicy
+    metadata:
+      name: vac-hub-timeout-policy
+      namespace: grpc-test
+    spec:
+      # 정책이 적용될 Service를 명시적으로 지정합니다.
+      targetRef:
+        group: ""
+        kind: Service
+        name: vac-hub-test-svc
+      default:
+        # 유휴 연결 타임아웃 (길게 설정)
+        timeoutSec: 600
+    ---        
+    # 4. 애플리케이션 Service (ClusterIP)
+    # HealthCheckPolicy를 어노테이션으로 연결
     apiVersion: v1
     kind: Service
     metadata:
       name: vac-hub-test-svc
       namespace: grpc-test
       annotations:
-        # 이 annotation을 통해 GCLB가 Pod와 직접 통신하는 NEG를 생성합니다.
-        cloud.google.com/neg: '{"exposed_ports": {"50051":{}}}'
-        # 위에서 생성한 BackendConfig를 이 서비스에 연결합니다.
-        cloud.google.com/backend-config: '{"default": "vac-hub-backend-config"}'
+        # Gateway API가 Pod를 직접 타겟팅(NEG)하도록 설정
+        cloud.google.com/neg: '{"gateway": true}'
     spec:
+      type: ClusterIP
       selector:
         app: vac-hub-test
       ports:
@@ -394,15 +432,17 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
         protocol: TCP
         port: 50051
         targetPort: 50051
+        # ADDED: 이 포트가 gRPC 프로토콜을 사용함을 명시적으로 알려줍니다.
+        appProtocol: GRPC
     ---
-    # 4. Kubernetes Gateway: GKE에 Cloud Load Balancer 생성을 요청합니다.
+    # 5. Kubernetes Gateway: GKE에 Cloud Load Balancer 생성을 요청합니다.
     apiVersion: gateway.networking.k8s.io/v1
     kind: Gateway
     metadata:
       name: vac-hub-gateway
       namespace: grpc-test
     spec:
-      # CSM용(asm-gke-l7-gxlb)이 아닌, 표준 GKE L7 로드밸런서 클래스를 사용합니다.
+      # 표준 GKE L7 로드밸런서 클래스를 사용합니다.
       gatewayClassName: gke-l7-gxlb
       listeners:
       - name: http
@@ -412,8 +452,9 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
           namespaces:
             from: Same
     ---
-    # 5. HTTPRoute: Gateway로 들어온 트래픽을 서비스로 라우팅합니다.
+    # 6. HTTPRoute: Gateway로 들어온 트래픽을 서비스로 라우팅합니다.
     # gRPC는 HTTP/2 기반이므로 HTTPRoute로 처리가능합니다.
+    # GCPBackendPolicy(타임아웃용)를 필터로 연결
     apiVersion: gateway.networking.k8s.io/v1
     kind: HTTPRoute
     metadata:
@@ -421,13 +462,14 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
       namespace: grpc-test
     spec:
       parentRefs:
-      - name: vac-hub-gateway
+      - kind: Gateway
+        name: vac-hub-gateway
       rules:
       - backendRefs:
         - name: vac-hub-test-svc
           port: 50051
     ---
-    # 6. 애플리케이션 Deployment (변경 없음)
+    # 6. 애플리케이션 Deployment
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -443,6 +485,7 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
           labels:
             app: vac-hub-test
         spec:
+          terminationGracePeriodSeconds: 60
           containers:
           - name: vac-hub-test-server
             image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
@@ -451,6 +494,12 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
               name: grpc
             - containerPort: 8000
               name: prometheus
+            # ADDED: gRPC Readiness Probe를 추가합니다.
+            # GKE Gateway Controller가 이 설정을 보고 GCLB 헬스체크를 자동으로 구성합니다.
+            readinessProbe:
+              grpc:
+                port: 50051
+              initialDelaySeconds: 5
     ---
     # 7. HorizontalPodAutoscaler (HPA): Prometheus 커스텀 메트릭 기반 오토스케일링
     apiVersion: autoscaling/v2
