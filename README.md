@@ -393,14 +393,17 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하합니다.
 
 2.  **GKE 배포 매니페스트 (`application-gateway.yaml`):**
-    *   `~/grpc-hpa-test/k8s/application-gateway.yaml` 파일을 아래 내용으로 작성합니다.
+    *   `~/grpc-hpa-test/k8s/namespace.yaml` 파일을 아래 내용으로 작성합니다.
     ```yaml
     # 1. 애플리케이션을 위한 Namespace
     apiVersion: v1
     kind: Namespace
     metadata:
       name: grpc-test
-    ---
+    ```
+    
+    *   `~/grpc-hpa-test/k8s/application-gateway.yaml` 파일을 아래 내용으로 작성합니다.
+    ```yaml
     # 2. HealthCheckPolicy: Gateway API를 위한 상태 확인 설정 리소스
     # "상태 확인은 GRPC로 하라"고 명시
     # https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_health_check
@@ -560,9 +563,10 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     # 이전에 적용된 리소스가 꼬이는 것을 방지하기 위해 delete 후 apply를 권장합니다.
     cd ~/grpc-hpa-test/k8s
     envsubst < application.yaml | kubectl delete -f - --ignore-not-found
+    kubectl apply -f ./namespace.yaml
     # Kubernetes TLS Secret 만들기
     kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
-    envsubst < application.yaml | kubectl apply -f -
+    envsubst < application-gateway.yaml | kubectl apply -f -
     ```
 
 ---
@@ -571,6 +575,9 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
 
 1.  **배포 상태 확인:**
     ```bash
+    # Secret 확인
+    kubectl get secret grpc-cert -n grpc-test
+
     # Deployment와 Service가 정상적으로 생성되었는지 확인
     kubectl get deployment,svc -n grpc-test
 
