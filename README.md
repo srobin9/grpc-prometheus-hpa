@@ -579,16 +579,16 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
 3.  **클라이언트 실행:**
     *   로컬 터미널에서 가상환경을 활성화하고 클라이언트를 실행하여 부하를 발생시킵니다.
     ```bash
-    # 프로젝트 최상위 디렉토리로 이동
+    # 1. 서버의 인증서 파일을 클라이언트 디렉토리로 복사합니다.
+    cp ~/grpc-hpa-test/k8s/tls.crt ~/grpc-hpa-test/client/
+    
+    # 2. 가상환경 활성화 및 client 디렉토리로 이동
     cd ~/grpc-hpa-test
     source venv/bin/activate
-
-    # client 디렉토리로 이동
     cd ~/grpc-hpa-test/client
-    pip install -r requirements.txt
-
-    # 10개의 동시 스트림 생성 (위에서 확인한 Gateway IP 사용)
-    python client.py [GATEWAY_EXTERNAL_IP]:80 --streams 10
+    
+    # 3. 클라이언트 실행 (GATEWAY_IP:443 포트와 --cert_file 옵션 사용)
+    python client.py [GATEWAY_EXTERNAL_IP]:443 --streams 10 --cert_file ./tls.crt
     ```
 
 4.  **HPA 동작 확인:**
