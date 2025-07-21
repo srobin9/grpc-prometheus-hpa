@@ -121,31 +121,45 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     import grpc
     from concurrent import futures
     import logging
+    import os # OTEL Collector 주소를 위해 추가
     
-    # OpenTelemetry 설정
+    # --- 수정된 OpenTelemetry 설정 ---
     from opentelemetry import metrics
-    from opentelemetry.exporter.prometheus import PrometheusMetricReader
+    # OTLP 익스포터를 사용합니다.
+    from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter
+    # 주기적으로 메트릭을 내보내는 리더를 사용합니다.
     from opentelemetry.sdk.metrics import MeterProvider
+    from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
     from opentelemetry.instrumentation.grpc import GrpcInstrumentorServer
-    from prometheus_client import start_http_server
+    # --- Prometheus 관련 코드는 모두 삭제되었습니다 ---
     
     # Protobuf 컴파일된 코드
     import streaming_pb2
     import streaming_pb2_grpc
     
-    # --- 헬스 체크를 위한 추가 import ---
+    # 헬스 체크를 위한 import
     from grpc_health.v1 import health
     from grpc_health.v1 import health_pb2
     from grpc_health.v1 import health_pb2_grpc
     
     logging.basicConfig(level=logging.INFO)
     
-    # 1. OpenTelemetry 메트릭 설정
-    reader = PrometheusMetricReader()
+    # --- 1. OpenTelemetry 메트릭 설정 (OTLP 익스포터 사용) ---
+    # 환경 변수에서 OTEL Collector의 주소를 가져옵니다.
+    # 쿠버네티스 서비스 DNS 이름을 사용합니다: <서비스명>.<네임스페이스>.svc.cluster.local:<포트>
+    # 기본값은 로컬 테스트를 위한 주소입니다.
+    otel_collector_endpoint = os.getenv("OTEL_COLLECTOR_ENDPOINT", "localhost:4317")
+    logging.info(f"Sending metrics to OTEL Collector at: {otel_collector_endpoint}")
+    
+    # OTLP 익스포터를 설정합니다. insecure=True는 클러스터 내부 통신이므로 TLS가 필요 없음을 의미합니다.
+    exporter = OTLPMetricExporter(endpoint=otel_collector_endpoint, insecure=True)
+    # 5초마다 메트릭을 익스포터로 보내도록 설정합니다.
+    reader = PeriodicExportingMetricReader(exporter, export_interval_millis=5000)
     provider = MeterProvider(metric_readers=[reader])
     metrics.set_meter_provider(provider)
+    # --- 여기까지 ---
     
-    # 2. gRPC 서버 자동 계측
+    # 2. gRPC 서버 자동 계측 (변경 없음)
     grpc_server_instrumentor = GrpcInstrumentorServer()
     grpc_server_instrumentor.instrument()
     
@@ -157,32 +171,24 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
             try:
                 for request in request_iterator:
                     message_count += 1
-                    # 실제 음성 처리 로직을 모방하기 위한 약간의 딜레이
                     time.sleep(0.01)
                 logging.info(f"Stream closed. Processed {message_count} messages.")
                 return streaming_pb2.TextResponse(message_count=message_count)
             except grpc.RpcError as e:
                 logging.error(f"Stream broken: {e.details()}")
-                # 클라이언트 연결이 끊겼을 때도 정상 종료
                 return streaming_pb2.TextResponse(message_count=message_count)
     
-    
     def serve():
-        # 3. Prometheus 메트릭을 노출할 HTTP 서버 시작 (포트 8000)
-        start_http_server(port=8000, addr="0.0.0.0")
-        logging.info("Started Prometheus metrics server on port 8000.")
+        # --- 3. Prometheus 서버 시작 코드는 완전히 삭제되었습니다 ---
+        # 이제 메트릭은 OTLP로 직접 전송됩니다.
     
         server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
         streaming_pb2_grpc.add_StreamerServicer_to_server(StreamerService(), server)
     
-        # --- 헬스 체크 서비스 설정 및 추가 ---
+        # 헬스 체크 서비스 설정 및 추가 (변경 없음)
         health_servicer = health.HealthServicer()
         health_pb2_grpc.add_HealthServicer_to_server(health_servicer, server)
-        
-        # 전체 서버의 기본 상태를 SERVING으로 설정합니다.
-        # 특정 서비스별로 상태를 다르게 설정할 수도 있습니다.
         health_servicer.set("", health_pb2.HealthCheckResponse.SERVING)
-        # ------------------------------------
     
         server.add_insecure_port("[::]:50051")
         server.start()
@@ -201,6 +207,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     opentelemetry-sdk
     opentelemetry-instrumentation-grpc
     opentelemetry-exporter-prometheus
+    opentelemetry-exporter-otlp-proto-grpc
     prometheus-client
     grpcio-health-checking  # grpc health check 기능을 제공하는 라이브러리
     ```
@@ -419,8 +426,11 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
         kind: Service
         name: vac-hub-test-svc
       default:
+        checkIntervalSec: 15
+        healthyThreshold: 1
+        unhealthyThreshold: 2
         config:
-          type: 'GRPC'
+          type: GRPC
           grpcHealthCheck:
             port: 50051
     ---
@@ -460,7 +470,8 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
         port: 50051
         targetPort: 50051
         # ADDED: 이 포트가 gRPC 프로토콜을 사용함을 명시적으로 알려줍니다.
-        appProtocol: GRPC
+        # appProtocol: GRPC
+        appProtocol: kubernetes.io/h2c
     ---
     # 5. Kubernetes Gateway: GKE에 Cloud Load Balancer 생성을 요청합니다.
     apiVersion: gateway.networking.k8s.io/v1
@@ -470,7 +481,8 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
       namespace: grpc-test
     spec:
       # 표준 GKE L7 로드밸런서 클래스를 사용합니다.
-      gatewayClassName: gke-l7-gxlb
+      #gatewayClassName: gke-l7-gxlb
+      gatewayClassName: gke-l7-global-external-managed  
       listeners:
       - name: https
         protocol: HTTPS
@@ -482,6 +494,8 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
           mode: Terminate # 로드밸런서에서 TLS 종료
           certificateRefs:
           - name: grpc-cert # 로컬에서 생성한 TLS Secret
+            kind: Secret # 참조하는 리소스의 종류
+            group: ""
     ---
     # 6. HTTPRoute: Gateway로 들어온 트래픽을 서비스로 라우팅합니다.
     # gRPC는 HTTP/2 기반이므로 HTTPRoute로 처리가능합니다.
@@ -491,17 +505,19 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     metadata:
       name: vac-hub-http-route
       namespace: grpc-test
-    spec:
+    spec:  
       parentRefs:
       - kind: Gateway
         name: vac-hub-gateway
-        sectionName: https
+      hostnames:
+      - "grpc.example.com"
+    #    sectionName: https
       rules:
       - backendRefs:
         - name: vac-hub-test-svc
           port: 50051
     ---
-    # 7. 애플리케이션 Deployment
+    # --- 수정: gRPC 앱 배포 ---
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -521,19 +537,20 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
           containers:
           - name: vac-hub-test-server
             image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
+            # 환경 변수를 통해 Collector 서비스 주소를 전달합니다.
+            env:
+            - name: OTEL_COLLECTOR_ENDPOINT
+              value: "otel-collector.grpc-test.svc.cluster.local:4317"
             ports:
             - containerPort: 50051
               name: grpc
-            - containerPort: 8000
-              name: prometheus
-            # ADDED: gRPC Readiness Probe를 추가합니다.
-            # GKE Gateway Controller가 이 설정을 보고 GCLB 헬스체크를 자동으로 구성합니다.
+            # --- Prometheus 포트 8000은 더 이상 필요 없습니다 ---
             readinessProbe:
               grpc:
                 port: 50051
               initialDelaySeconds: 5
     ---
-    # 8. HorizontalPodAutoscaler (HPA): Prometheus 커스텀 메트릭 기반 오토스케일링
+    # HPA (변경 없음. 최종 수정된 External 타입 유지)
     apiVersion: autoscaling/v2
     kind: HorizontalPodAutoscaler
     metadata:
@@ -547,15 +564,35 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
       minReplicas: 1
       maxReplicas: 5
       metrics:
-      - type: Pods # Pods 메트릭 소스 사용
-        pods:
-          # OpenTelemetry에서 수집되는 'grpc_server_active_calls' 메트릭을 타겟으로 지정
+      - type: External
+        external:
           metric:
-            name: grpc_server_active_calls_gauge
-          # 각 Pod의 평균 메트릭 값이 3을 넘으면 스케일 아웃
+            name: prometheus.googleapis.com|grpc_server_active_calls_gauge|gauge
+            selector:
+              matchLabels:
+                metric.labels.app: vac-hub-test
           target:
             type: AverageValue
             averageValue: "3"
+    ---
+    # --- 수정: PodMonitoring ---
+    # https://cloud.google.com/stackdriver/docs/managed-prometheus/setup-managed#gmp-pod-monitoring
+    apiVersion: monitoring.googleapis.com/v1
+    kind: PodMonitoring
+    metadata:
+      name: otel-collector-pod-monitoring # 이름 변경 (더 명확하게)
+      namespace: grpc-test
+    spec:
+      # ### 가장 중요한 수정 ###
+      # 이제 gRPC 앱이 아닌, otel-collector 파드를 감시합니다.
+      selector:
+        matchLabels:
+          app: otel-collector
+      endpoints:
+      # Collector는 8888 포트에서 Prometheus 형식의 메트릭을 노출합니다.
+      - port: prometheus # Collector Deployment의 포트 이름과 일치
+        path: /metrics
+        interval: 30s
     ```
 
 3.  **GKE에 배포:**
