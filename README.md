@@ -13,7 +13,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 
 ---
 
-### **Phase 1: GKE 클러스터 및 환경 준비 (CSM 제외)**
+### **Phase 1: GKE 클러스터 및 환경 준비**
 
 1.  **gcloud 프로젝트 설정:**
     ```bash
@@ -78,35 +78,264 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 
 ### **Phase 2: 테스트용 gRPC 서버 애플리케이션**
 
-**(변경 사항 없음)** 이 단계는 인프라와 무관하므로 기존과 동일하게 진행합니다.
+이 서버는 클라이언트로부터 텍스트 스트림을 받고, 수신한 메시지 수를 계산하여 반환합니다. OpenTelemetry를 통해 Prometheus 메트릭을 노출합니다.
 
-1.  `grpc-hpa-test/server` 디렉토리 생성 및 `streaming.proto`, `server.py`, `requirements.txt` 파일 준비
-2.  Python 가상환경 설정 및 라이브러리 설치
-3.  Protobuf 컴파일 (`python -m grpc_tools.protoc ...`)
-4.  `__init__.py` 파일 생성
+1.  **디렉토리 생성 및 파일 준비:**
+    ```bash
+    mkdir grpc-hpa-test
+    cd grpc-hpa-test
+    mkdir server
+    cd server
+    ```
 
+2.  **Protobuf 정의 (`protos/streaming.proto`):**
+    ```protobuf
+    syntax = "proto3";
+
+    package streaming;
+
+    service Streamer {
+      // 클라이언트가 텍스트 스트림을 보내는 RPC
+      rpc ProcessTextStream(stream TextRequest) returns (TextResponse);
+    }
+
+    message TextRequest {
+      string message = 1;
+    }
+
+    message TextResponse {
+      int32 message_count = 1;
+    }
+    ```
+
+3.  **서버 코드 (`server.py`):**
+    ```python
+    import time
+    import grpc
+    from concurrent import futures
+    import logging
+    
+    # OpenTelemetry 설정
+    from opentelemetry import metrics
+    from opentelemetry.exporter.prometheus import PrometheusMetricReader
+    from opentelemetry.sdk.metrics import MeterProvider
+    from opentelemetry.instrumentation.grpc import GrpcInstrumentorServer
+    from prometheus_client import start_http_server
+    
+    # Protobuf 컴파일된 코드
+    import streaming_pb2
+    import streaming_pb2_grpc
+    
+    logging.basicConfig(level=logging.INFO)
+    
+    # 1. OpenTelemetry 메트릭 설정
+    reader = PrometheusMetricReader()
+    provider = MeterProvider(metric_readers=[reader])
+    metrics.set_meter_provider(provider)
+    
+    # 2. gRPC 서버 자동 계측
+    grpc_server_instrumentor = GrpcInstrumentorServer()
+    grpc_server_instrumentor.instrument()
+    
+    class StreamerService(streaming_pb2_grpc.StreamerServicer):
+        """gRPC 스트리밍 서비스 구현"""
+        def ProcessTextStream(self, request_iterator, context):
+            logging.info("New stream opened.")
+            message_count = 0
+            try:
+                for request in request_iterator:
+                    message_count += 1
+                    # 실제 음성 처리 로직을 모방하기 위한 약간의 딜레이
+                    time.sleep(0.01)
+                logging.info(f"Stream closed. Processed {message_count} messages.")
+                return streaming_pb2.TextResponse(message_count=message_count)
+            except grpc.RpcError as e:
+                logging.error(f"Stream broken: {e.details()}")
+                # 클라이언트 연결이 끊겼을 때도 정상 종료
+                return streaming_pb2.TextResponse(message_count=message_count)
+    
+    
+    def serve():
+        # 3. Prometheus 메트릭을 노출할 HTTP 서버 시작 (포트 8000)
+        start_http_server(port=8000, addr="0.0.0.0")
+        logging.info("Started Prometheus metrics server on port 8000.")
+    
+        server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+        streaming_pb2_grpc.add_StreamerServicer_to_server(StreamerService(), server)
+        server.add_insecure_port("[::]:50051")
+        server.start()
+        logging.info("gRPC server started on port 50051.")
+        server.wait_for_termination()
+    
+    if __name__ == "__main__":
+        serve()
+    ```
+
+4.  **필요 라이브러리 (`requirements.txt`):**
+    ```
+    grpcio
+    grpcio-tools
+    opentelemetry-api
+    opentelemetry-sdk
+    opentelemetry-instrumentation-grpc
+    opentelemetry-exporter-prometheus
+    prometheus-client
+    ```
+5.  **Python용 가상환경 설정:**
+    ```bash
+    # 프로젝트 최상위 디렉토리로 이동
+    cd ~/grpc-hpa-test
+
+    # 가상환경 생성
+    python3 -m venv venv
+
+    # 가상환경 활성화
+    source venv/bin/activate
+    ```
+
+6.  **필요 Library 설치:**
+    ```bash
+    # grpc-hpa-test/server 디렉토리 안에 있는지 확인합니다.
+    cd ~/grpc-hpa-test/server
+
+    # requirements.txt 파일을 사용하여 라이브러리 설치
+    pip install -r requirements.txt
+    ```
+
+7.  **Protobuf 컴파일:**
+    ```bash
+    python -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/streaming.proto
+    ```
+
+8.  **Python 가상환경 비활성화:**
+    ```bash
+    deactivate
+    ```
+
+9.  **빈 __init___.py 파일 생성**
+    ```bash
+    # grpc-hpa-test/server/protos/ 디렉토리 안에 빈 파일을 생성합니다.
+    touch ~/grpc-hpa-test/server/protos/__init__.py
+    ```
+ 
 ---
 
 ### **Phase 3: 테스트용 gRPC 클라이언트 애플리케이션**
 
-**(변경 사항 없음)** 클라이언트 코드 역시 기존과 동일합니다.
+이 클라이언트는 여러 개의 동시 스트림을 생성하여 서버에 부하를 줍니다.
 
-1.  `grpc-hpa-test/client` 디렉토리 생성 및 필요 파일 복사
-2.  `client.py` 코드 준비
+1.  **디렉토리 생성 및 파일 준비:**
+    ```bash
+    cd .. # grpc-hpa-test 디렉토리로 이동
+    mkdir client
+    cd client
+    # 서버와 동일한 proto 및 requirements.txt, 컴파일된 파일 복사
+    cp -r ../server/protos .
+    cp ../server/requirements.txt .
+    cp ../server/streaming_pb2.py .
+    cp ../server/streaming_pb2_grpc.py .
+    ```
+
+2.  **클라이언트 코드 (`client.py`):**
+    ```python
+    import grpc
+    import time
+    import threading
+    import argparse
+    
+    import streaming_pb2
+    import streaming_pb2_grpc
+    
+    def generate_messages():
+        """메시지를 무한정 생성하는 제너레이터"""
+        i = 0
+        while True:
+            yield streaming_pb2.TextRequest(message=f"This is message number {i}")
+            i += 1
+            time.sleep(0.1) # 0.1초마다 메시지 전송
+    
+    def run_stream(server_address: str):
+        """단일 gRPC 스트림을 실행하는 함수"""
+        with grpc.insecure_channel(server_address) as channel:
+            stub = streaming_pb2_grpc.StreamerStub(channel)
+            print(f"Starting a new stream to {server_address}...")
+            try:
+                response = stub.ProcessTextStream(generate_messages())
+                print(f"Stream finished. Server processed {response.message_count} messages.")
+            except grpc.RpcError as e:
+                print(f"Stream failed with error: {e.code()} - {e.details()}")
+    
+    if __name__ == "__main__":
+        parser = argparse.ArgumentParser()
+        parser.add_argument("server_address", help="The gRPC server address (e.g., 34.12.34.56:50051)")
+        parser.add_argument("--streams", type=int, default=5, help="Number of concurrent streams to run")
+        args = parser.parse_args()
+    
+        threads = []
+        for _ in range(args.streams):
+            thread = threading.Thread(target=run_stream, args=(args.server_address,))
+            threads.append(thread)
+            thread.start()
+            time.sleep(0.5) # 스트림을 약간의 시간차를 두고 시작
+    
+        for thread in threads:
+            thread.join()
+    ```
 
 ---
 
 ### **Phase 4: 컨테이너화**
 
-**(변경 사항 없음)** Dockerfile 작성 및 Cloud Build를 통한 이미지 빌드/푸시 과정은 동일합니다.
+1.  **서버용 Dockerfile (`server/Dockerfile`):**
+    ```dockerfile
+    # 베이스 이미지
+    FROM python:3.9-slim
+    
+    # 작업 디렉토리 설정
+    WORKDIR /app
+    
+    # 시스템 패키지 매니저를 업데이트하고, 컴파일에 필요한 build-essential 설치
+    # (가끔 네이티브 코드를 컴파일해야 하는 라이브러리를 위해 필요)
+    RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
+    
+    # 의존성 파일만 먼저 복사하여 Docker 캐시 활용 극대화
+    COPY requirements.txt .
+    
+    # 의존성 설치
+    RUN pip install --no-cache-dir -r requirements.txt
+    
+    # 나머지 소스 코드 복사
+    COPY . .
+    
+    # Protobuf 컴파일
+    RUN python3 -m grpc_tools.protoc -I./protos --python_out=. --grpc_python_out=. ./protos/streaming.proto
+    
+    # 포트 노출
+    EXPOSE 50051 8000
+    
+    # 애플리케이션 실행 (python3로 명시)
+    # CMD ["python3", "server.py"]
+    
+    # 컨테이너 시작 시, 설치된 패키지 목록을 출력한 후 서버 실행 (최종 디버깅)
+    CMD sh -c "echo '--- Installed packages inside container: ---' && pip list && echo '--- Starting server ---' && python3 server.py"
+    ```
 
-1.  **서버용 Dockerfile (`server/Dockerfile`) 작성**
-2.  **Artifact Registry 저장소 생성 (필요시)**
-3.  **Cloud Build를 사용하여 이미지 빌드 및 푸시**
+2.  **Artifact Registry 저장소 생성 (Option):**
     ```bash
-    # (grpc-hpa-test 디렉토리에서 실행)
+    gcloud artifacts repositories create grpc-test-repo \
+    --repository-format=docker \
+    --location=$REGION \
+    --description="Repository for gRPC HPA test images"
+    ```
+
+3.  **Cloud Build를 사용하여 이미지 빌드 및 Artifact Registry에 푸시:**
+    ```bash
+    # 1. 타임스탬프 기반의 고유한 태그를 생성하고 환경 변수에 저장합니다.
     export IMAGE_TAG=$(date -u +%Y%m%d-%H%M%S)
     echo "A new unique tag has been created: $IMAGE_TAG"
+    
+    # (grpc-hpa-test 디렉토리에서 실행)
+    # 2. 이 고유한 태그를 사용하여 이미지를 빌드하고 푸시합니다.
     gcloud builds submit ./server --tag="${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
     ```
 
@@ -114,7 +343,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 
 ### **Phase 5: GKE 배포 (Cloud Load Balancer 사용)**
 
-CSM 관련 리소스(`asm-gke-l7-gxlb`) 대신, GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하도록 배포 매니페스트를 수정합니다. HPA 설정도 명시적으로 추가합니다.
+GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하합니다.
 
 1.  **디렉토리 생성:**
     ```bash
