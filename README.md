@@ -75,6 +75,12 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     # "true"가 출력되어야 합니다.
     ```
 
+8.  **K8S 디렉토리 생성:**
+    ```bash
+    mkdir -p ~/grpc-hpa-test/k8s/
+    cd ~/grpc-hpa-test/k8s/
+    ```
+
 ---
 
 ### **Phase 2: 테스트용 gRPC 서버 애플리케이션**
@@ -236,25 +242,21 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     ```
 ---
 
-### **Phase 3: 테스트용 TLS 인증서 및 Kubernetes Secret 생성**
+### **Phase 3: 테스트용 gRPC 클라이언트 애플리케이션**
 
-먼저 로컬 머신에서 테스트에 사용할 자체 서명 인증서를 만듭니다. grpc.example.com이라는 임시 도메인 이름으로 인증서를 발급하겠습니다.
+이 클라이언트는 여러 개의 동시 스트림을 생성하여 서버에 부하를 줍니다.
+
+0.  **테스트용 TLS 인증서 및 Kubernetes Secret 생성**
+
+    먼저 로컬 머신에서 테스트에 사용할 자체 서명 인증서를 만듭니다. grpc.example.com이라는 임시 도메인 이름으로 인증서를 발급하겠습니다.
 
     ```bash
     # grpc-hpa-test/k8s 디렉토리에서 실행하세요.
     cd ~/grpc-hpa-test/k8s
     
-    # 1. 자체 서명 인증서와 키 생성
+    # 자체 서명 인증서와 키 생성
     openssl req -x509 -newkey rsa:2048 -nodes -keyout tls.key -out tls.crt -subj "/CN=grpc.example.com"
-    
-    # 2. 생성된 파일로 Kubernetes TLS Secret 만들기
-    kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
     ``` 
----
-
-### **Phase 3: 테스트용 gRPC 클라이언트 애플리케이션**
-
-이 클라이언트는 여러 개의 동시 스트림을 생성하여 서버에 부하를 줍니다.
 
 1.  **디렉토리 생성 및 파일 준비:**
     ```bash
@@ -270,62 +272,61 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 
 2.  **클라이언트 코드 (`client.py`):**
     ```python
-import grpc
-import time
-import threading
-import argparse
-
-import streaming_pb2
-import streaming_pb2_grpc
-
-def generate_messages():
-    """메시지를 무한정 생성하는 제너레이터"""
-    i = 0
-    while True:
-        yield streaming_pb2.TextRequest(message=f"This is message number {i}")
-        i += 1
-        time.sleep(0.1) # 0.1초마다 메시지 전송
-
-def run_stream(server_address: str, root_certs: bytes):
-    """단일 gRPC 스트림을 실행하는 함수"""
-    credentials = grpc.ssl_channel_credentials(root_certificates=root_certs)
-    # insecure_channel을 secure_channel로 변경하고, 인증서 정보를 전달합니다.
-    # 'grpc.ssl_target_name_override' 옵션은 자체 서명 인증서의 도메인 이름을 지정합니다.
-    with grpc.secure_channel(
-        server_address, 
-        credentials, 
-        options=(('grpc.ssl_target_name_override', 'grpc.example.com'),)
-    ) as channel:
-        stub = streaming_pb2_grpc.StreamerStub(channel)
-        print(f"Starting a new stream to {server_address}...")
-        try:
-            response = stub.ProcessTextStream(generate_messages())
-            print(f"Stream finished. Server processed {response.message_count} messages.")
-        except grpc.RpcError as e:
-            print(f"Stream failed with error: {e.code()} - {e.details()}")
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("server_address", help="The gRPC server address (e.g., 34.12.34.56:50051)")
-    parser.add_argument("--streams", type=int, default=5, help="Number of concurrent streams to run")
-    parser.add_argument("--cert_file", help="Path to the server's certificate file", required=True)
-    args = parser.parse_args()
-
-    # 인증서 파일을 읽어들입니다.
-    with open(args.cert_file, 'rb') as f:
-        root_certs = f.read()
+    import grpc
+    import time
+    import threading
+    import argparse
     
-    threads = []
-    for _ in range(args.streams):
-        # run_stream 함수에 인증서 내용을 전달합니다.
-        thread = threading.Thread(target=run_stream, args=(args.server_address, root_certs))
-        threads.append(thread)
-        thread.start()
-        time.sleep(0.5) # 스트림을 약간의 시간차를 두고 시작
-
-    for thread in threads:
-        thread.join()
-
+    import streaming_pb2
+    import streaming_pb2_grpc
+    
+    def generate_messages():
+        """메시지를 무한정 생성하는 제너레이터"""
+        i = 0
+        while True:
+            yield streaming_pb2.TextRequest(message=f"This is message number {i}")
+            i += 1
+            time.sleep(0.1) # 0.1초마다 메시지 전송
+    
+    def run_stream(server_address: str, root_certs: bytes):
+        """단일 gRPC 스트림을 실행하는 함수"""
+        credentials = grpc.ssl_channel_credentials(root_certificates=root_certs)
+        # insecure_channel을 secure_channel로 변경하고, 인증서 정보를 전달합니다.
+        # 'grpc.ssl_target_name_override' 옵션은 자체 서명 인증서의 도메인 이름을 지정합니다.
+        with grpc.secure_channel(
+            server_address, 
+            credentials, 
+            options=(('grpc.ssl_target_name_override', 'grpc.example.com'),)
+        ) as channel:
+            stub = streaming_pb2_grpc.StreamerStub(channel)
+            print(f"Starting a new stream to {server_address}...")
+            try:
+                response = stub.ProcessTextStream(generate_messages())
+                print(f"Stream finished. Server processed {response.message_count} messages.")
+            except grpc.RpcError as e:
+                print(f"Stream failed with error: {e.code()} - {e.details()}")
+    
+    if __name__ == "__main__":
+        parser = argparse.ArgumentParser()
+        parser.add_argument("server_address", help="The gRPC server address (e.g., 34.12.34.56:50051)")
+        parser.add_argument("--streams", type=int, default=5, help="Number of concurrent streams to run")
+        parser.add_argument("--cert_file", help="Path to the server's certificate file", required=True)
+        args = parser.parse_args()
+    
+        # 인증서 파일을 읽어들입니다.
+        with open(args.cert_file, 'rb') as f:
+            root_certs = f.read()
+        
+        threads = []
+        for _ in range(args.streams):
+            # run_stream 함수에 인증서 내용을 전달합니다.
+            thread = threading.Thread(target=run_stream, args=(args.server_address, root_certs))
+            threads.append(thread)
+            thread.start()
+            time.sleep(0.5) # 스트림을 약간의 시간차를 두고 시작
+    
+        for thread in threads:
+            thread.join()
     ```
 
 ---
@@ -390,12 +391,6 @@ if __name__ == "__main__":
 ### **Phase 5: GKE 배포 (Cloud Load Balancer 사용)**
 
 GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하합니다.
-
-1.  **디렉토리 생성:**
-    ```bash
-    mkdir -p ~/grpc-hpa-test/k8s/
-    cd ~/grpc-hpa-test/k8s/
-    ```
 
 2.  **GKE 배포 매니페스트 (`application-gateway.yaml`):**
     *   `~/grpc-hpa-test/k8s/application-gateway.yaml` 파일을 아래 내용으로 작성합니다.
@@ -565,6 +560,8 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     # 이전에 적용된 리소스가 꼬이는 것을 방지하기 위해 delete 후 apply를 권장합니다.
     cd ~/grpc-hpa-test/k8s
     envsubst < application.yaml | kubectl delete -f - --ignore-not-found
+    # Kubernetes TLS Secret 만들기
+    kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
     envsubst < application.yaml | kubectl apply -f -
     ```
 
