@@ -234,7 +234,22 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     # grpc-hpa-test/server/protos/ 디렉토리 안에 빈 파일을 생성합니다.
     touch ~/grpc-hpa-test/server/protos/__init__.py
     ```
- 
+---
+
+### **Phase 3: 테스트용 TLS 인증서 및 Kubernetes Secret 생성**
+
+먼저 로컬 머신에서 테스트에 사용할 자체 서명 인증서를 만듭니다. grpc.example.com이라는 임시 도메인 이름으로 인증서를 발급하겠습니다.
+
+    ```bash
+    # grpc-hpa-test/k8s 디렉토리에서 실행하세요.
+    cd ~/grpc-hpa-test/k8s
+    
+    # 1. 자체 서명 인증서와 키 생성
+    openssl req -x509 -newkey rsa:2048 -nodes -keyout tls.key -out tls.crt -subj "/CN=grpc.example.com"
+    
+    # 2. 생성된 파일로 Kubernetes TLS Secret 만들기
+    kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
+    ``` 
 ---
 
 ### **Phase 3: 테스트용 gRPC 클라이언트 애플리케이션**
