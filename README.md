@@ -273,7 +273,14 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     
     def run_stream(server_address: str):
         """단일 gRPC 스트림을 실행하는 함수"""
-        with grpc.insecure_channel(server_address) as channel:
+        credentials = grpc.ssl_channel_credentials(root_certificates=root_certs)
+        # insecure_channel을 secure_channel로 변경하고, 인증서 정보를 전달합니다.
+        # 'grpc.ssl_target_name_override' 옵션은 자체 서명 인증서의 도메인 이름을 지정합니다.
+        with grpc.secure_channel(
+            server_address, 
+            credentials, 
+            options=(('grpc.ssl_target_name_override', 'grpc.example.com'),)
+        ) as channel:
             stub = streaming_pb2_grpc.StreamerStub(channel)
             print(f"Starting a new stream to {server_address}...")
             try:
@@ -286,11 +293,17 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
         parser = argparse.ArgumentParser()
         parser.add_argument("server_address", help="The gRPC server address (e.g., 34.12.34.56:50051)")
         parser.add_argument("--streams", type=int, default=5, help="Number of concurrent streams to run")
+        parser.add_argument("--cert_file", help="Path to the server's certificate file", required=True)
         args = parser.parse_args()
     
+        # 인증서 파일을 읽어들입니다.
+        with open(args.cert_file, 'rb') as f:
+            root_certs = f.read()
+        
         threads = []
         for _ in range(args.streams):
-            thread = threading.Thread(target=run_stream, args=(args.server_address,))
+            # run_stream 함수에 인증서 내용을 전달합니다.
+            thread = threading.Thread(target=run_stream, args=(args.server_address, root_certs))
             threads.append(thread)
             thread.start()
             time.sleep(0.5) # 스트림을 약간의 시간차를 두고 시작
@@ -368,8 +381,8 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     cd ~/grpc-hpa-test/k8s/
     ```
 
-2.  **GKE 배포 매니페스트 (`application.yaml`):**
-    *   `~/grpc-hpa-test/k8s/application.yaml` 파일을 아래 내용으로 작성합니다.
+2.  **GKE 배포 매니페스트 (`application-gateway.yaml`):**
+    *   `~/grpc-hpa-test/k8s/application-gateway.yaml` 파일을 아래 내용으로 작성합니다.
     ```yaml
     # 1. 애플리케이션을 위한 Namespace
     apiVersion: v1
@@ -445,12 +458,16 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
       # 표준 GKE L7 로드밸런서 클래스를 사용합니다.
       gatewayClassName: gke-l7-gxlb
       listeners:
-      - name: http
-        protocol: HTTP
-        port: 80
+      - name: https
+        protocol: HTTPS
+        port: 443
         allowedRoutes:
           namespaces:
             from: Same
+        tls:
+          mode: Terminate # 로드밸런서에서 TLS 종료
+          certificateRefs:
+          - name: grpc-cert # 로컬에서 생성한 TLS Secret
     ---
     # 6. HTTPRoute: Gateway로 들어온 트래픽을 서비스로 라우팅합니다.
     # gRPC는 HTTP/2 기반이므로 HTTPRoute로 처리가능합니다.
@@ -464,12 +481,13 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
       parentRefs:
       - kind: Gateway
         name: vac-hub-gateway
+        sectionName: https
       rules:
       - backendRefs:
         - name: vac-hub-test-svc
           port: 50051
     ---
-    # 6. 애플리케이션 Deployment
+    # 7. 애플리케이션 Deployment
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -501,7 +519,7 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
                 port: 50051
               initialDelaySeconds: 5
     ---
-    # 7. HorizontalPodAutoscaler (HPA): Prometheus 커스텀 메트릭 기반 오토스케일링
+    # 8. HorizontalPodAutoscaler (HPA): Prometheus 커스텀 메트릭 기반 오토스케일링
     apiVersion: autoscaling/v2
     kind: HorizontalPodAutoscaler
     metadata:
