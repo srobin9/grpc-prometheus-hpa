@@ -596,7 +596,16 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     ```
     `ADDRESS` 필드에 나타나는 IP 주소를 복사합니다.
 
-3.  **클라이언트 실행:**
+3.  **Gateway backend protocol 확인:**
+    *   Cloud Load Balancer backend protocol 확인
+    ```bash
+    gcloud compute backend-services list \
+        --filter="name~grpc-test AND name~vac-hub-test-svc" \
+        --format="value(name)" \
+    | xargs -I {} gcloud compute backend-services describe {} --global --format="value(protocol)"
+    ```
+
+4.  **클라이언트 실행:**
     *   로컬 터미널에서 가상환경을 활성화하고 클라이언트를 실행하여 부하를 발생시킵니다.
     ```bash
     # 1. 서버의 인증서 파일을 클라이언트 디렉토리로 복사합니다.
@@ -611,7 +620,7 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     python client.py [GATEWAY_EXTERNAL_IP]:443 --streams 10 --cert_file ./tls.crt
     ```
 
-4.  **HPA 동작 확인:**
+5.  **HPA 동작 확인:**
     *   새로운 터미널을 열고 HPA가 메트릭을 수집하고 파드 개수를 조정하는지 확인합니다.
     ```bash
     # 1분 간격으로 HPA 상태를 확인
@@ -619,14 +628,14 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     ```
     *   출력의 `TARGETS` 컬럼에 `.../3` 과 같이 현재 메트릭 값과 목표 값이 표시됩니다. 부하가 증가하면 `REPLICAS` 수가 1에서 점차 늘어나는 것을 볼 수 있습니다.
 
-5.  **Cloud Monitoring에서 메트릭 확인:**
+6.  **Cloud Monitoring에서 메트릭 확인:**
     *   Google Cloud Console에서 **Monitoring > Metrics Explorer**로 이동합니다.
     *   **리소스 유형(Resource type)** 에서 `GKE Prometheus Target`을 선택합니다.
     *   **측정항목(Metric)** 에서 `grpc_server_active_calls_gauge` 를 검색하여 선택합니다.
     *   `Group By` 옵션에 `pod` 를 추가하면 각 파드별 활성 gRPC 연결 수를 그래프로 확인할 수 있습니다. HPA에 의해 파드가 늘어나는 모습을 시각적으로 볼 수 있습니다.
     * CSM 관련 대시보드는 보이지 않지만, **부하 분산(Load Balancing)** 메뉴에서 생성된 로드밸런서를 클릭하여 트래픽, 백엔드 상태 등의 상세 정보를 확인할 수 있습니다.
 
-6.  **테스트 종료 후 정리:**
+7.  **테스트 종료 후 정리:**
     ```bash
     # Python 가상환경 비활성화
     deactivate
