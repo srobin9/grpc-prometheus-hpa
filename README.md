@@ -47,8 +47,9 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 4.  **GKE Autopilot 클러스터 생성:**
     ```bash
     gcloud container clusters create-auto $CLUSTER_NAME \
-        --location=$REGION \
         --release-channel=regular \
+        --gateway-api=standard \
+        --location=$REGION \
         --project=$PROJECT_ID
     ```
     *생성까지 몇 분 정도 소요됩니다.*
