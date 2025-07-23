@@ -30,7 +30,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
     export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectNumber)')
     export REGION=$(gcloud config list --format 'value(compute.region)')
-    export CLUSTER_NAME=grpc-observability-test
+    export CLUSTER_NAME=grpc-otel-test
     ```
 
 3.  **필수 API 활성화:**
