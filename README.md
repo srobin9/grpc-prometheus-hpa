@@ -139,7 +139,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 2.  **Cloud Build를 사용하여 이미지 빌드 및 Artifact Registry에 푸시:**
     ```bash
     cd ~/grpc-hpa-test
-    
+
     # 1. 타임스탬프 기반의 고유한 태그를 생성하고 환경 변수에 저장합니다.
     export IMAGE_TAG=$(date -u +%Y%m%d-%H%M%S)
     echo "A new unique tag has been created: $IMAGE_TAG"
@@ -151,216 +151,68 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 
 ---
 
+### **Phase 4: Google 기반 OpenTelemetry Collector 설치****
+
+GKE에 Collector 배포 참조[https://cloud.google.com/stackdriver/docs/instrumentation/opentelemetry-collector-gke?hl=ko]
+
+1.  **권한 구성:**
+    ```bash
+    gcloud projects add-iam-policy-binding projects/$PROJECT_ID \
+        --role=roles/logging.logWriter \
+        --member=principal://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$PROJECT_ID.svc.id.goog/subject/ns/opentelemetry/sa/opentelemetry-collector
+    gcloud projects add-iam-policy-binding projects/$PROJECT_ID \
+        --role=roles/monitoring.metricWriter \
+        --member=principal://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$PROJECT_ID.svc.id.goog/subject/ns/opentelemetry/sa/opentelemetry-collector
+    gcloud projects add-iam-policy-binding projects/$PROJECT_ID \
+        --role=roles/cloudtrace.agent \
+        --member=principal://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$PROJECT_ID.svc.id.goog/subject/ns/opentelemetry/sa/opentelemetry-collector
+    ```
+
+2.  **Collector 배포:**
+    ```bash
+    kubectl kustomize https://github.com/GoogleCloudPlatform/otlp-k8s-ingest.git/k8s/base | envsubst | kubectl apply -f -
+    ```
+
+---
+
 ### **Phase 5: GKE 배포 (Cloud Load Balancer 사용)**
 
-GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하합니다.
-
-2.  **GKE 배포 매니페스트 (`application-gateway.yaml`):**
-    *   `~/grpc-hpa-test/k8s/namespace.yaml` 파일을 아래 내용으로 작성합니다.
-    ```yaml
-    # 1. 애플리케이션을 위한 Namespace
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: grpc-test
-    ```
-    
-    *   `~/grpc-hpa-test/k8s/application-gateway.yaml` 파일을 아래 내용으로 작성합니다.
-    ```yaml
-    # 2. HealthCheckPolicy: Gateway API를 위한 상태 확인 설정 리소스
-    # "상태 확인은 GRPC로 하라"고 명시
-    # https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_health_check
-    apiVersion: networking.gke.io/v1
-    kind: HealthCheckPolicy
-    metadata:
-      name: vac-hub-grpc-health-check-policy
-      namespace: grpc-test
-    spec:
-      # 이 정책이 적용될 대상을 명시적으로 지정합니다.
-      targetRef:
-        group: ""
-        kind: Service
-        name: vac-hub-test-svc
-      default:
-        checkIntervalSec: 15
-        healthyThreshold: 1
-        unhealthyThreshold: 2
-        config:
-          type: GRPC
-          grpcHealthCheck:
-            port: 50051
-    ---
-    # 3. GCPBackendPolicy: "클라이언트 연결 후 10분간 데이터가 없어도 끊지 마"
-    apiVersion: networking.gke.io/v1
-    kind: GCPBackendPolicy
-    metadata:
-      name: vac-hub-timeout-policy
-      namespace: grpc-test
-    spec:
-      # 정책이 적용될 Service를 명시적으로 지정합니다.
-      targetRef:
-        group: ""
-        kind: Service
-        name: vac-hub-test-svc
-      default:
-        # 유휴 연결 타임아웃 (길게 설정)
-        timeoutSec: 600
-    ---        
-    # 4. 애플리케이션 Service (ClusterIP)
-    # HealthCheckPolicy를 어노테이션으로 연결
-    apiVersion: v1
-    kind: Service
-    metadata:
-      name: vac-hub-test-svc
-      namespace: grpc-test
-      annotations:
-        # Gateway API가 Pod를 직접 타겟팅(NEG)하도록 설정
-        cloud.google.com/neg: '{"gateway": true}'
-    spec:
-      type: ClusterIP
-      selector:
-        app: vac-hub-test
-      ports:
-      - name: grpc
-        protocol: TCP
-        port: 50051
-        targetPort: 50051
-        # ADDED: 이 포트가 gRPC 프로토콜을 사용함을 명시적으로 알려줍니다.
-        # appProtocol: GRPC
-        appProtocol: kubernetes.io/h2c
-    ---
-    # 5. Kubernetes Gateway: GKE에 Cloud Load Balancer 생성을 요청합니다.
-    apiVersion: gateway.networking.k8s.io/v1
-    kind: Gateway
-    metadata:
-      name: vac-hub-gateway
-      namespace: grpc-test
-    spec:
-      # 표준 GKE L7 로드밸런서 클래스를 사용합니다.
-      #gatewayClassName: gke-l7-gxlb
-      gatewayClassName: gke-l7-global-external-managed  
-      listeners:
-      - name: https
-        protocol: HTTPS
-        port: 443
-        allowedRoutes:
-          namespaces:
-            from: Same
-        tls:
-          mode: Terminate # 로드밸런서에서 TLS 종료
-          certificateRefs:
-          - name: grpc-cert # 로컬에서 생성한 TLS Secret
-            kind: Secret # 참조하는 리소스의 종류
-            group: ""
-    ---
-    # 6. HTTPRoute: Gateway로 들어온 트래픽을 서비스로 라우팅합니다.
-    # gRPC는 HTTP/2 기반이므로 HTTPRoute로 처리가능합니다.
-    # GCPBackendPolicy(타임아웃용)를 필터로 연결
-    apiVersion: gateway.networking.k8s.io/v1
-    kind: HTTPRoute
-    metadata:
-      name: vac-hub-http-route
-      namespace: grpc-test
-    spec:  
-      parentRefs:
-      - kind: Gateway
-        name: vac-hub-gateway
-      hostnames:
-      - "grpc.example.com"
-    #    sectionName: https
-      rules:
-      - backendRefs:
-        - name: vac-hub-test-svc
-          port: 50051
-    ---
-    # --- 수정: gRPC 앱 배포 ---
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: vac-hub-test
-      namespace: grpc-test
-    spec:
-      replicas: 1
-      selector:
-        matchLabels:
-          app: vac-hub-test
-      template:
-        metadata:
-          labels:
-            app: vac-hub-test
-        spec:
-          terminationGracePeriodSeconds: 60
-          containers:
-          - name: vac-hub-test-server
-            image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
-            # 환경 변수를 통해 Collector 서비스 주소를 전달합니다.
-            env:
-            - name: OTEL_COLLECTOR_ENDPOINT
-              value: "otel-collector.grpc-test.svc.cluster.local:4317"
-            ports:
-            - containerPort: 50051
-              name: grpc
-            # --- Prometheus 포트 8000은 더 이상 필요 없습니다 ---
-            readinessProbe:
-              grpc:
-                port: 50051
-              initialDelaySeconds: 5
-    ---
-    # HPA (변경 없음. 최종 수정된 External 타입 유지)
-    apiVersion: autoscaling/v2
-    kind: HorizontalPodAutoscaler
-    metadata:
-      name: vac-hub-test-hpa
-      namespace: grpc-test
-    spec:
-      scaleTargetRef:
-        apiVersion: apps/v1
-        kind: Deployment
-        name: vac-hub-test
-      minReplicas: 1
-      maxReplicas: 5
-      metrics:
-      - type: External
-        external:
-          metric:
-            name: prometheus.googleapis.com|grpc_server_active_calls_gauge|gauge
-            selector:
-              matchLabels:
-                metric.labels.app: vac-hub-test
-          target:
-            type: AverageValue
-            averageValue: "3"
-    ---
-    # --- 수정: PodMonitoring ---
-    # https://cloud.google.com/stackdriver/docs/managed-prometheus/setup-managed#gmp-pod-monitoring
-    apiVersion: monitoring.googleapis.com/v1
-    kind: PodMonitoring
-    metadata:
-      name: otel-collector-pod-monitoring # 이름 변경 (더 명확하게)
-      namespace: grpc-test
-    spec:
-      # ### 가장 중요한 수정 ###
-      # 이제 gRPC 앱이 아닌, otel-collector 파드를 감시합니다.
-      selector:
-        matchLabels:
-          app: otel-collector
-      endpoints:
-      # Collector는 8888 포트에서 Prometheus 형식의 메트릭을 노출합니다.
-      - port: prometheus # Collector Deployment의 포트 이름과 일치
-        path: /metrics
-        interval: 30s
-    ```
-
-3.  **GKE에 배포:**
+1.  **Namespace 삭제 (Option):**
     ```bash
     # 이전에 적용된 리소스가 꼬이는 것을 방지하기 위해 delete 후 apply를 권장합니다.
     cd ~/grpc-hpa-test/k8s
     kubectl delete -f ./namespace.yaml --ignore-not-found
-    kubectl apply -f ./namespace.yaml
+    ```
+
+2.  **K8S TLS Secret 생성:**
+    ```bash
+    cd ~/grpc-hpa-test/k8s
     # Kubernetes TLS Secret 만들기
     kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
+    ```
+
+3.  **Namespace 생성:**
+    ```bash
+    cd ~/grpc-hpa-test/k8s
+    kubectl apply -f ./namespace.yaml
+    ```
+
+4.  **Gateway 생성:**
+    ```bash
+    cd ~/grpc-hpa-test/k8s
     kubectl apply -f ./gateway.yaml
+    ```
+
+5.  **Deployment 생성:**
+    ```bash
+    cd ~/grpc-hpa-test/k8s
     envsubst < deployment.yaml | kubectl apply -f -
+    ```
+
+6.  **HPA 생성:**
+    ```bash
+    cd ~/grpc-hpa-test/k8s
+    kubectl apply -f ./hpa.yaml
     ```
 
 ---
