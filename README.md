@@ -599,11 +599,12 @@ GKE Gateway Controller가 관리하는 표준 Cloud Load Balancer를 사용하�
     ```bash
     # 이전에 적용된 리소스가 꼬이는 것을 방지하기 위해 delete 후 apply를 권장합니다.
     cd ~/grpc-hpa-test/k8s
-    envsubst < application-gateway.yaml | kubectl delete -f - --ignore-not-found
+    kubectl delete -f ./namespace.yaml --ignore-not-found
     kubectl apply -f ./namespace.yaml
     # Kubernetes TLS Secret 만들기
     kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
-    envsubst < application-gateway.yaml | kubectl apply -f -
+    kubectl apply -f ./gateway.yaml
+    envsubst < deployment.yaml | kubectl apply -f -
     ```
 
 ---
