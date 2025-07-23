@@ -19,7 +19,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
     ```bash
     # (이미 설정하셨다면 생략)
     gcloud config set project [YOUR_PROJECT_ID]
-    gcloud config set compute/region [YOUR_REGION] # 예: asia-northeast3
+    gcloud config set compute/region asia-northeast3
 
     # 설정 확인
     gcloud config list
