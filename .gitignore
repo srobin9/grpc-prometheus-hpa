@@ -1,0 +1,3 @@
+/venv
+/k8s/tls.crt
+/k8s/tls.key
