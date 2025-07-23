@@ -66,7 +66,16 @@ class StreamerService(streaming_pb2_grpc.StreamerServicer):
             logging.info(f"Stream closed. Processed {message_count} messages.")
             return streaming_pb2.TextResponse(message_count=message_count)
         except grpc.RpcError as e:
-            logging.error(f"Stream broken by RpcError: {e.details()} (Code: {e.code()}). Processed {message_count} messages.")
+            # 에러의 상태 코드를 확인합니다.
+            if e.code() == grpc.StatusCode.CANCELLED:
+                # 클라이언트가 스트림을 정상적으로 (또는 의도적으로) 취소한 경우 INFO로 기록합니다.
+                logging.info(f"Stream cancelled by client after {message_count} messages.")
+            else:
+                # 그 외 예측하지 못한 RpcError는 ERROR로 기록합니다.
+                logging.error(f"Stream broken by unexpected RpcError: {e}. Processed {message_count} messages.")
+            
+            # 클라이언트가 이미 떠났으므로 응답을 보내는 것은 의미가 없을 수 있지만, 
+            # 로직상 리턴 구문은 유지합니다.
             return streaming_pb2.TextResponse(message_count=message_count)
 
 def serve():

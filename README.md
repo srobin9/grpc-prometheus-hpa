@@ -18,7 +18,10 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 1.  **gcloud 프로젝트 설정:**
     ```bash
     # (이미 설정하셨다면 생략)
-    gcloud config set project [YOUR_PROJECT_ID]
+    gcloud auth login
+    # gcloud config set project [YOUR_PROJECT_ID]
+    gcloud config set project p-khm8-dev-dvc
+    # gcloud config set compute/region [YOUR_REGION]
     gcloud config set compute/region asia-northeast3
 
     # 설정 확인
@@ -236,10 +239,7 @@ GKE에 Collector 배포 참조[https://cloud.google.com/stackdriver/docs/instrum
     ```bash
     # -w 플래그로 IP가 할당될 때까지 실시간으로 확인
     kubectl get gateway vac-hub-gateway -n grpc-test -w
-
-    # NAME              CLASS          ADDRESS         READY   AGE
-    # vac-hub-gateway   gke-l7-gxlb    34.12.34.56     True    2m
-    ```
+   ```
     `ADDRESS` 필드에 나타나는 IP 주소를 복사합니다.
 
 3.  **Gateway backend protocol 확인:**
