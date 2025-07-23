@@ -1,0 +1,5 @@
+# 1. 애플리케이션을 위한 Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grpc-test

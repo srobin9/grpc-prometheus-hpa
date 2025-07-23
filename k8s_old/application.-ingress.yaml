@@ -1,0 +1,105 @@
+# 1. 애플리케이션을 위한 Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grpc-test
+---
+# 2. GCPBackendPolicy: Gateway API를 위한 백엔드 설정 리소스
+# 헬스 체크를 HTTP2 타입으로 그리고 타임아웃은 10분으로 명시적으로 정의합니다.
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: vac-hub-backend-config
+  namespace: grpc-test
+spec:
+  healthCheck:
+    type: HTTP2
+    port: 50051
+    requestPath: / # HTTP2 헬스체크는 기본 경로에 요청합니다.
+---
+# 3. 애플리케이션 Service: Ingress와 연동되도록 NodePort 타입으로 변경하고, BackendConfig를 연결합니다.
+apiVersion: v1
+kind: Service
+metadata:
+  name: vac-hub-test-svc
+  namespace: grpc-test
+  annotations:
+    # NEG(Network Endpoint Group)를 사용하도록 설정합니다.
+    cloud.google.com/neg: '{"ingress": true}'
+    # 위에서 생성한 BackendConfig를 이 서비스에 연결합니다.
+    cloud.google.com/backend-config: '{"default": "vac-hub-backend-config"}'
+spec:
+  type: NodePort # Ingress와 NEG를 함께 사용할 때의 표준 타입입니다.
+  selector:
+    app: vac-hub-test
+  ports:
+  - name: grpc
+    protocol: TCP
+    port: 50051
+    targetPort: 50051
+---
+# 4. Ingress: GKE에 Cloud Load Balancer 생성을 요청하는 표준 방식입니다.
+# (Gateway와 HTTPRoute 리소스를 대체합니다.)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vac-hub-ingress
+  namespace: grpc-test
+spec:
+  defaultBackend:
+    service:
+      name: vac-hub-test-svc
+      port:
+        number: 50051
+---
+# 5. 애플리케이션 Deployment (gRPC Health Probe 포함, 변경 없음)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vac-hub-test
+  namespace: grpc-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vac-hub-test
+  template:
+    metadata:
+      labels:
+        app: vac-hub-test
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: vac-hub-test-server
+        image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}" # IMAGE_TAG는 헬스체크가 포함된 최신 것을 사용해야 합니다.
+        ports:
+        - containerPort: 50051
+          name: grpc
+        - containerPort: 8000
+          name: prometheus
+        readinessProbe:
+          grpc:
+            port: 50051
+          initialDelaySeconds: 5
+---
+# 6. HorizontalPodAutoscaler (HPA) (변경 없음)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vac-hub-test-hpa
+  namespace: grpc-test
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vac-hub-test
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: grpc_server_active_calls_gauge
+      target:
+        type: AverageValue
+        averageValue: "3"

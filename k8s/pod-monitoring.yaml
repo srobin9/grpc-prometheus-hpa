@@ -1,0 +1,18 @@
+---
+# --- 수정: PodMonitoring ---
+# https://cloud.google.com/stackdriver/docs/managed-prometheus/setup-managed#gmp-pod-monitoring
+apiVersion: monitoring.googleapis.com/v1
+kind: PodMonitoring
+metadata:
+  name: vac-hub-pod-monitoring # 이름 변경
+  namespace: grpc-test
+spec:
+  # ### 가장 중요한 수정 ###
+  # 이제 gRPC 앱이 아닌, otel-collector 파드를 감시합니다.
+  selector:
+    matchLabels:
+      app: otel-collector # OTEL Collector Deployment의 라벨과 일치
+  endpoints:
+  - port: 8080
+    path: /metrics
+    interval: 15s

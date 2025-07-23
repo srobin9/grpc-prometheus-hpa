@@ -1,0 +1,91 @@
+# otel-collector.yaml (volumes 섹션을 포함한 최종 완성본)
+
+# 1. OTEL Collector의 설정을 위한 ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-conf
+  namespace: grpc-test
+data:
+  collector-config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: "0.0.0.0:4317"
+          http:
+            endpoint: "0.0.0.0:4318"
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 75
+        spike_limit_percentage: 15
+      resourcedetection:
+        detectors: [gcp]
+      batch:
+    exporters:
+      googlemanagedprometheus: {}
+    service:
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [resourcedetection, memory_limiter, batch]
+          exporters: [googlemanagedprometheus]
+
+---
+# 2. OTEL Collector를 위한 Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: otel-collector
+  namespace: grpc-test
+spec:
+  selector:
+    app: otel-collector
+  ports:
+  - name: otlp-grpc
+    protocol: TCP
+    port: 4317
+    targetPort: 4317
+  - name: otlp-http
+    protocol: TCP
+    port: 4318
+    targetPort: 4318
+
+---
+# 3. OTEL Collector를 위한 Deployment (최종 수정)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: otel-collector
+  namespace: grpc-test
+  labels:
+    app: otel-collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: otel-collector
+  template:
+    metadata:
+      labels:
+        app: otel-collector
+    spec:
+      serviceAccountName: otel-collector-ksa
+      containers:
+      - name: otel-collector
+        image: otel/opentelemetry-collector-contrib:latest
+        imagePullPolicy: Always
+        command:
+          - "/otelcol-contrib"
+          - "--config=/conf/collector-config.yaml"
+        # 컨테이너 내부에 볼륨을 마운트하는 부분
+        volumeMounts:
+        - name: otel-collector-config-vol
+          mountPath: /conf
+      
+      # ===> 누락되었던 핵심 부분: 파드 레벨에서 볼륨을 정의하는 부분 <===
+      volumes:
+      - name: otel-collector-config-vol
+        configMap:
+          name: otel-collector-conf

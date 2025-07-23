@@ -1,0 +1,36 @@
+# hpa.yaml (최종 권장안)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vac-hub-test-hpa
+  namespace: grpc-test
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vac-hub-test
+  minReplicas: 1
+  maxReplicas: 10
+  
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 80
+
+  # ===> QPS 스케일링을 'Pods' 타입으로 변경 (GKE 최적화) <===
+  - type: Pods
+    pods:
+      metric:
+        # 이름은 Cloud Monitoring의 메트릭 이름을 그대로 사용합니다.
+        name: "prometheus.googleapis.com|rpc_server_duration_count|gauge"
+        
+      # HPA가 파드별로 값을 계산하여 평균을 냅니다.
+      target:
+        type: AverageValue
+        # 파드당 평균 10 QPS를 목표로 합니다.
+        # HPA는 이 카운터의 1분당 증가율(rate)을 계산하여 QPS를 구하고,
+        # 이 값이 10을 넘으면 스케일 아웃합니다.
+        averageValue: "10"

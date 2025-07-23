@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vac-hub-test
+  namespace: grpc-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vac-hub-test
+  template:
+    metadata:
+      labels:
+        app: vac-hub-test
+    spec:
+      # ===> 추가: 파드가 올바른 권한을 갖도록 KSA 지정
+      #serviceAccountName: otel-collector-ksa
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: vac-hub-test-server
+        image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
+        imagePullPolicy: Always
+        env:
+        - name: OTEL_COLLECTOR_ENDPOINT
+        #  value: "otel-collector.grpc-test.svc.cluster.local:4317"
+          value: "opentelemetry-collector.opentelemetry.svc.cluster.local:4317"
+        ports:
+        - containerPort: 50051
+          name: grpc
+        # ===> 수정: 리소스 요청량 최적화
+        resources:
+          requests:
+            cpu: 250m
+            memory: 256Mi
+        # ===> 수정: Readiness Probe 설정 완화
+        readinessProbe:
+          grpc:
+            port: 50051
+          initialDelaySeconds: 10 # 초기 시작 대기 시간 증가
+          periodSeconds: 15     # 검사 주기 증가
+          timeoutSeconds: 5       # 타임아웃 시간 증가

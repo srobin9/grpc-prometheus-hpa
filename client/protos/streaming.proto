@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package streaming;
+
+service Streamer {
+  // 클라이언트가 텍스트 스트림을 보내는 RPC
+  rpc ProcessTextStream(stream TextRequest) returns (TextResponse);
+}
+
+message TextRequest {
+  string message = 1;
+}
+
+message TextResponse {
+  int32 message_count = 1;
+}

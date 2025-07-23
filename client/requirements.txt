@@ -1,0 +1,7 @@
+grpcio
+grpcio-tools
+opentelemetry-api
+opentelemetry-sdk
+opentelemetry-instrumentation-grpc
+opentelemetry-exporter-prometheus
+prometheus-client

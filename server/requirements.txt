@@ -1,0 +1,14 @@
+# requirements.txt
+
+# OpenTelemetry - 모든 관련 패키지를 최신 안정 버전으로 통일합니다.
+opentelemetry-api==1.25.0
+opentelemetry-sdk==1.25.0
+opentelemetry-exporter-otlp-proto-grpc==1.25.0
+opentelemetry-instrumentation-grpc==0.46b0
+opentelemetry-exporter-prometheus
+
+# gRPC 및 기타 라이브러리
+grpcio
+grpcio-tools
+prometheus-client
+grpcio-health-checking  # grpc health check 기능을 제공하는 라이브러리

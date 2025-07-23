@@ -1,0 +1,100 @@
+# 1. 애플리케이션을 위한 Namespace (변경 없음)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grpc-test
+---
+# 2. BackendConfig: Ingress를 위한 백엔드 설정 리소스 (변경 없음)
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: vac-hub-backend-config
+  namespace: grpc-test
+spec:
+  healthCheck:
+    type: HTTP2
+    port: 50051
+    requestPath: /
+---
+# 3. 애플리케이션 Service: Ingress가 HTTP2 프로토콜을 사용하도록 어노테이션 추가
+apiVersion: v1
+kind: Service
+metadata:
+  name: vac-hub-test-svc
+  namespace: grpc-test
+  annotations:
+    cloud.google.com/neg: '{"ingress": true}'
+    cloud.google.com/backend-config: '{"default": "vac-hub-backend-config"}'
+    # --- 최종 해결책 ---
+    # Ingress 컨트롤러에게 이 서비스의 프로토콜이 HTTP2임을 명시적으로 알려줍니다.
+    # 포트 이름 'grpc'는 아래 ports.name과 일치해야 합니다.
+    cloud.google.com/app-protocols: '{"grpc":"HTTP2"}'
+spec:
+  type: NodePort
+  selector:
+    app: vac-hub-test
+  ports:
+  - name: grpc # <--- 이 이름이 위 어노테이션의 키와 일치합니다.
+    protocol: TCP
+    port: 50051
+    targetPort: 50051
+---
+# 4. Ingress (변경 없음)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vac-hub-ingress
+  namespace: grpc-test
+spec:
+  defaultBackend:
+    service:
+      name: vac-hub-test-svc
+      port:
+        number: 50051
+---
+# 5. 애플리케이션 Deployment (변경 없음)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vac-hub-test
+  namespace: grpc-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vac-hub-test
+  template:
+    metadata:
+      labels:
+        app: vac-hub-test
+    spec:
+      containers:
+      - name: vac-hub-test-server
+        image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
+        ports:
+        - containerPort: 50051
+        readinessProbe:
+          grpc:
+            port: 50051
+---
+# 6. HorizontalPodAutoscaler (HPA) (Deployment만 참조하도록 수정)
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vac-hub-test-hpa
+  namespace: grpc-test
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: vac-hub-test
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: grpc_server_active_calls_gauge
+      target:
+        type: AverageValue
+        averageValue: "3"

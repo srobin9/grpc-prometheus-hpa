@@ -1,0 +1,87 @@
+# 1. 애플리케이션을 위한 Namespace (변경 없음)
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grpc-test
+  labels:
+    # Managed Control Plane이 이 네임스페이스의 파드에 사이드카를 주입하도록 설정
+    istio-injection: enabled
+---
+# 2. Istio Gateway: 외부 트래픽을 받을 End-Point를 정의합니다.
+# CSM에 의해 관리되는 istio-ingressgateway를 사용하도록 설정합니다.
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: vac-hub-istio-gateway
+  namespace: grpc-test
+spec:
+  # 이 selector가 istio-ingressgateway를 선택합니다.
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*" # 모든 호스트명의 요청을 받습니다.
+---
+# 3. Istio VirtualService: Gateway로 들어온 트래픽을
+# 어떤 규칙으로 어떤 내부 서비스에 보낼지 정의합니다.
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vac-hub-virtualservice
+  namespace: grpc-test
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - vac-hub-istio-gateway # 위에서 생성한 Istio Gateway와 연결합니다.
+  http:
+  - match:
+    - uri:
+        prefix: "/" # 모든 경로의 요청에 대해
+    route:
+    - destination:
+        host: vac-hub-test-svc.grpc-test.svc.cluster.local # 내부 서비스의 FQDN
+        port:
+          number: 50051 # 서비스가 노출하는 포트
+---
+# 4. 애플리케이션 Deployment (변경 없음)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vac-hub-test
+  namespace: grpc-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vac-hub-test
+  template:
+    metadata:
+      labels:
+        app: vac-hub-test
+    spec:
+      containers:
+      - name: vac-hub-test-server
+        # image 태그는 이전 단계에서 생성한 환경 변수를 그대로 사용합니다.
+        image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
+        ports:
+        - containerPort: 50051
+          name: grpc
+---
+# 5. 애플리케이션 Service (변경 없음)
+apiVersion: v1
+kind: Service
+metadata:
+  name: vac-hub-test-svc
+  namespace: grpc-test
+spec:
+  selector:
+    app: vac-hub-test
+  ports:
+  - name: grpc
+    port: 50051
+    targetPort: 50051

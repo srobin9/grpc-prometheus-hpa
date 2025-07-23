@@ -1,0 +1,83 @@
+# 1. 애플리케이션을 위한 Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: grpc-test
+  #labels:
+    # Managed Control Plane이 이 네임스페이스의 파드에 사이드카를 주입하도록 설정
+    #istio-injection: enabled
+---
+# 2. Kubernetes Gateway API를 사용한 게이트웨이 "요청"
+# 이 리소스를 생성하면 Managed Service Mesh가 백그라운드에서
+# 실제 Load Balancer와 프록시를 프로비저닝합니다.
+#apiVersion: gateway.networking.k8s.io/v1
+#kind: Gateway
+#metadata:
+#  name: vac-hub-gateway
+#  namespace: grpc-test
+#spec:
+#  gatewayClassName: asm-gke-l7-gxlb # Managed Service Mesh에서 제공하는 클래스
+#  listeners:
+#  - name: grpc
+#    protocol: HTTP # gRPC는 HTTP/2 기반이므로 HTTP로 설정
+#    port: 80
+#    allowedRoutes:
+#      namespaces:
+#        from: Same # 같은 네임스페이스의 Route만 허용
+---
+# 3. GRPCRoute를 사용한 라우팅 규칙 (VirtualService 대체)
+# HTTPRoute는 v1으로 안정화되어 있으며, gRPC 트래픽을 처리할 수 있습니다.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vac-hub-http-route
+  namespace: grpc-test
+spec:
+  # 위에서 만든 Gateway와 연결
+  parentRefs:
+  - name: vac-hub-gateway
+    namespace: grpc-test
+    kind: Service
+    group: ""
+  # 모든 gRPC 요청을 vac-hub-test-svc로 보냄
+  rules:
+  - backendRefs:
+    - name: vac-hub-test-svc
+      port: 50051
+---
+# 4. 애플리케이션 Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vac-hub-test
+  namespace: grpc-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vac-hub-test
+  template:
+    metadata:
+      labels:
+        app: vac-hub-test
+    spec:
+      containers:
+      - name: vac-hub-test-server
+        image: "${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
+        ports:
+        - containerPort: 50051
+          name: grpc
+---
+# 5. 애플리케이션 Service (ClusterIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: vac-hub-test-svc
+  namespace: grpc-test
+spec:
+  selector:
+    app: vac-hub-test
+  ports:
+  - name: grpc
+    port: 50051
+    targetPort: 50051

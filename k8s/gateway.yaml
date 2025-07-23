@@ -1,0 +1,106 @@
+# 2. HealthCheckPolicy: Gateway API를 위한 상태 확인 설정 리소스
+# "상태 확인은 GRPC로 하라"고 명시
+# https://cloud.google.com/kubernetes-engine/docs/how-to/configure-gateway-resources#configure_health_check
+apiVersion: networking.gke.io/v1
+kind: HealthCheckPolicy
+metadata:
+  name: vac-hub-grpc-health-check-policy
+  namespace: grpc-test
+spec:
+  # 이 정책이 적용될 대상을 명시적으로 지정합니다.
+  targetRef:
+    group: ""
+    kind: Service
+    name: vac-hub-test-svc
+  default:
+    checkIntervalSec: 15
+    healthyThreshold: 1
+    unhealthyThreshold: 2
+    config:
+      type: GRPC
+      grpcHealthCheck:
+        port: 50051
+---
+# 3. GCPBackendPolicy: "클라이언트 연결 후 10분간 데이터가 없어도 끊지 마"
+apiVersion: networking.gke.io/v1
+kind: GCPBackendPolicy
+metadata:
+  name: vac-hub-timeout-policy
+  namespace: grpc-test
+spec:
+  # 정책이 적용될 Service를 명시적으로 지정합니다.
+  targetRef:
+    group: ""
+    kind: Service
+    name: vac-hub-test-svc
+  default:
+    # 유휴 연결 타임아웃 (길게 설정)
+    timeoutSec: 600
+---        
+# 4. 애플리케이션 Service (ClusterIP)
+# HealthCheckPolicy를 어노테이션으로 연결
+apiVersion: v1
+kind: Service
+metadata:
+  name: vac-hub-test-svc
+  namespace: grpc-test
+  annotations:
+    # Gateway API가 Pod를 직접 타겟팅(NEG)하도록 설정
+    cloud.google.com/neg: '{"gateway": true}'
+spec:
+  type: ClusterIP
+  selector:
+    app: vac-hub-test
+  ports:
+  - name: grpc
+    protocol: TCP
+    port: 50051
+    targetPort: 50051
+    # ADDED: 이 포트가 gRPC 프로토콜을 사용함을 명시적으로 알려줍니다.
+    # appProtocol: GRPC
+    appProtocol: kubernetes.io/h2c
+---
+# 5. Kubernetes Gateway: GKE에 Cloud Load Balancer 생성을 요청합니다.
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: vac-hub-gateway
+  namespace: grpc-test
+spec:
+  # 표준 GKE L7 로드밸런서 클래스를 사용합니다.
+  #gatewayClassName: gke-l7-gxlb
+  gatewayClassName: gke-l7-global-external-managed  
+  listeners:
+  - name: https
+    protocol: HTTPS
+    port: 443
+    allowedRoutes:
+      namespaces:
+        from: Same
+    tls:
+      mode: Terminate # 로드밸런서에서 TLS 종료
+      certificateRefs:
+      - name: grpc-cert # 로컬에서 생성한 TLS Secret
+        kind: Secret # 참조하는 리소스의 종류
+        group: ""
+---
+# 6. HTTPRoute: Gateway로 들어온 트래픽을 서비스로 라우팅합니다.
+# gRPC는 HTTP/2 기반이므로 HTTPRoute로 처리가능합니다.
+# GCPBackendPolicy(타임아웃용)를 필터로 연결
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: vac-hub-http-route
+  namespace: grpc-test
+spec:  
+  parentRefs:
+  - kind: Gateway
+    name: vac-hub-gateway
+  hostnames:
+  - "grpc.example.com"
+#    sectionName: https
+  rules:
+  - backendRefs:
+    - name: vac-hub-test-svc
+      port: 50051
+
