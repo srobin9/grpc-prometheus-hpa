@@ -184,17 +184,17 @@ GKE에 Collector 배포 참조[https://cloud.google.com/stackdriver/docs/instrum
     kubectl delete -f ./namespace.yaml --ignore-not-found
     ```
 
-2.  **K8S TLS Secret 생성:**
+2.  **Namespace 생성:**
+    ```bash
+    cd ~/grpc-hpa-test/k8s
+    kubectl apply -f ./namespace.yaml
+    ```
+
+3.  **K8S TLS Secret 생성:**
     ```bash
     cd ~/grpc-hpa-test/k8s
     # Kubernetes TLS Secret 만들기
     kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
-    ```
-
-3.  **Namespace 생성:**
-    ```bash
-    cd ~/grpc-hpa-test/k8s
-    kubectl apply -f ./namespace.yaml
     ```
 
 4.  **Gateway 생성:**
