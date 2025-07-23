@@ -151,7 +151,7 @@ OTEL & Prometheus testing in GKE autopilot cluster with Cloud Load Balancer
 
 ---
 
-### **Phase 4: Google 기반 OpenTelemetry Collector 설치****
+### **Phase 4: Google 기반 OpenTelemetry Collector 설치**
 
 GKE에 Collector 배포 참조[https://cloud.google.com/stackdriver/docs/instrumentation/opentelemetry-collector-gke?hl=ko]
 
@@ -175,7 +175,7 @@ GKE에 Collector 배포 참조[https://cloud.google.com/stackdriver/docs/instrum
 
 ---
 
-### **Phase 5: GKE 배포 (Cloud Load Balancer 사용)**
+### **Phase 5: GKE 배포**
 
 1.  **Namespace 삭제 (Option):**
     ```bash
