@@ -74,7 +74,7 @@
 7.  **테스트용 TLS 인증서 생성:**
     ```bash
     # k8s 디렉토리로 이동
-    cd ~/grpc-hpa-test/k8s
+    cd ~/grpc-prometheus-hpa/k8s
     
     # 자체 서명 인증서와 키 생성
     openssl req -x509 -newkey rsa:2048 -nodes -keyout tls.key -out tls.crt -subj "/CN=grpc.example.com"
@@ -92,7 +92,7 @@
 
 2.  **Cloud Build로 이미지 빌드 및 푸시:**
     ```bash
-    cd ~/grpc-hpa-test
+    cd ~/grpc-prometheus-hpa
 
     export IMAGE_TAG=$(date -u +%Y%m%d-%H%M%S)
     echo "New image tag: $IMAGE_TAG"
@@ -127,7 +127,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
 
 1.  **Namespace 및 TLS Secret 생성:**
     ```bash
-    cd ~/grpc-hpa-test/k8s
+    cd ~/grpc-prometheus-hpa/k8s
     kubectl apply -f ./namespace.yaml
     kubectl create secret tls grpc-cert -n grpc-test --key tls.key --cert tls.crt --dry-run=client -o yaml | kubectl apply -f -
     ```
@@ -135,19 +135,19 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
 2.  **GMP(Managed Prometheus) 설정** 
     `PodMonitoring` 리소스를 생성하여 GMP가 애플리케이션의 `/metrics` 엔드포인트를 주기적으로 수집(scrape)하도록 지시합니다.
     ```bash
-    cd ~/grpc-hpa-test/k8s
+    cd ~/grpc-prometheus-hpa/k8s
     kubectl apply -f ./pod-monitoring.yaml
     ```
 
 3.  **Gateway 및 HTTPRoute 생성 (GCLB용):**
     ```bash
-    cd ~/grpc-hpa-test/k8s
+    cd ~/grpc-prometheus-hpa/k8s
     kubectl apply -f ./gateway.yaml
     ```
 
 4.  **Deployment 및 Service 생성:**
     ```bash
-    cd ~/grpc-hpa-test/k8s
+    cd ~/grpc-prometheus-hpa/k8s
     # deployment.yaml의 이미지 태그를 최신 버전으로 바꿉니다.
     envsubst < deployment.yaml | kubectl apply -f -
     kubectl apply -f ./service.yaml
@@ -156,7 +156,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
 5.  **HPA 생성:**
     `hpa.yaml` 파일이 커스텀 메트릭 `grpc_server_active_streams`를 바라보도록 설정합니다.
     ```bash
-    cd ~/grpc-hpa-test/k8s
+    cd ~/grpc-prometheus-hpa/k8s
     kubectl apply -f ./hpa.yaml
     ```
 ---
@@ -197,12 +197,12 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
 3.  **클라이언트 실행:**
     ```bash
     # 1. 서버 인증서 파일을 클라이언트 디렉토리로 복사
-    cp ~/grpc-hpa-test/k8s/tls.crt ~/grpc-hpa-test/client/
+    cp ~/grpc-prometheus-hpa/k8s/tls.crt ~/grpc-prometheus-hpa/client/
     
     # 2. 가상환경 활성화 및 client 디렉토리로 이동
-    cd ~/grpc-hpa-test
+    cd ~/grpc-prometheus-hpa
     source venv/bin/activate
-    cd ~/grpc-hpa-test/client
+    cd ~/grpc-prometheus-hpa/client
     
     # 3. 클라이언트 실행 (스트림 수를 늘려 부하를 발생시킵니다)
     python client.py [GATEWAY_EXTERNAL_IP]:443 --streams 15 --cert_file ./tls.crt
