@@ -2,6 +2,7 @@ import grpc
 import time
 import threading
 import argparse
+import random
 
 import streaming_pb2
 import streaming_pb2_grpc
@@ -15,22 +16,43 @@ def generate_messages():
         time.sleep(0.1) # 0.1초마다 메시지 전송
 
 def run_stream(server_address: str, root_certs: bytes):
-    """단일 gRPC 스트림을 실행하는 함수"""
-    credentials = grpc.ssl_channel_credentials(root_certificates=root_certs)
-    # insecure_channel을 secure_channel로 변경하고, 인증서 정보를 전달합니다.
-    # 'grpc.ssl_target_name_override' 옵션은 자체 서명 인증서의 도메인 이름을 지정합니다.
-    with grpc.secure_channel(
-        server_address, 
-        credentials, 
-        options=(('grpc.ssl_target_name_override', 'grpc.example.com'),)
-    ) as channel:
-        stub = streaming_pb2_grpc.StreamerStub(channel)
-        print(f"Starting a new stream to {server_address}...")
+    """서버의 연결 종료를 예상하고 자동으로 재연결하는 단일 gRPC 스트림을 실행하는 함수"""
+    
+    while True: # 스트림이 어떤 이유로든 종료되면, 자동으로 재시도하기 위한 무한 루프
         try:
-            response = stub.ProcessTextStream(generate_messages())
-            print(f"Stream finished. Server processed {response.message_count} messages.")
+            credentials = grpc.ssl_channel_credentials(root_certificates=root_certs)
+            with grpc.secure_channel(
+                server_address, 
+                credentials, 
+                options=(('grpc.ssl_target_name_override', 'grpc.example.com'),)
+            ) as channel:
+                stub = streaming_pb2_grpc.StreamerStub(channel)
+                print(f"Starting a new stream to {server_address}...")
+                
+                # 스트림 시작
+                response = stub.ProcessTextStream(generate_messages())
+                
+                # 스트림이 정상적으로 완료된 경우 (실제로는 거의 발생하지 않음)
+                print(f"Stream finished cleanly. Server processed {response.message_count} messages.")
+                break # 정상 종료 시에는 루프 탈출
+
         except grpc.RpcError as e:
-            print(f"Stream failed with error: {e.code()} - {e.details()}")
+            # 서버가 max_connection_age로 연결을 종료하면 UNAVAILABLE 코드가 발생합니다.
+            if e.code() == grpc.StatusCode.UNAVAILABLE:
+                print(f"Connection likely closed by server for rebalancing. Reconnecting automatically...")
+            else:
+                # 그 외 다른 RPC 오류 (네트워크 문제 등)
+                print(f"Stream failed with RPC error: {e.code()} - {e.details()}. Retrying...")
+
+        except Exception as e:
+            # gRPC 외의 예외 처리
+            print(f"An unexpected error occurred: {e}. Retrying...")
+
+        # 재연결 전, 모든 클라이언트가 동시에 재연결을 시도하는 것을 막기 위해
+        # 약간의 무작위 지연(Jitter)을 줍니다.
+        reconnect_delay = random.uniform(1, 5) 
+        print(f"Will attempt to reconnect in {reconnect_delay:.2f} seconds.")
+        time.sleep(reconnect_delay)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

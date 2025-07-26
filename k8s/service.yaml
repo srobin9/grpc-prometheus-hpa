@@ -1,0 +1,24 @@
+# 4. 애플리케이션 Service (ClusterIP)
+# HealthCheckPolicy를 어노테이션으로 연결
+apiVersion: v1
+kind: Service
+metadata:
+  name: vac-hub-test-svc
+  namespace: grpc-test
+  annotations:
+    # Gateway API가 Pod를 직접 타겟팅(NEG)하도록 설정
+    cloud.google.com/neg: '{"gateway": true}'
+
+spec:
+  type: ClusterIP
+  selector:
+    app: vac-hub-test
+  ports:
+  - name: grpc
+    protocol: TCP
+    port: 50051
+    targetPort: 50051
+    # HTTP/2 Clear Text - TCP를 통해 HTTP/2 사용, TLS 불필요
+    # https://cloud.google.com/load-balancing/docs/https?hl=ko#protocol-to-backends
+    appProtocol: kubernetes.io/h2c
+    

@@ -6,8 +6,14 @@ WORKDIR /app
 
 # 시스템 패키지 매니저를 업데이트하고, 컴파일에 필요한 build-essential 설치
 # (가끔 네이티브 코드를 컴파일해야 하는 라이브러리를 위해 필요)
-RUN apt-get update && apt-get install -y build-essential && rm -rf /var/lib/apt/lists/*
-
+# grpc_health_probe 설치
+# C/C++ 빌드 도구와 wget을 설치했다가, 프로브 다운로드 후 삭제하여 이미지 크기를 최적화합니다.
+RUN apt-get update && apt-get install -y wget build-essential && \
+    GRPC_HEALTH_PROBE_VERSION=v0.4.26 && \
+    wget -q https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${GRPC_HEALTH_PROBE_VERSION}/grpc_health_probe-linux-amd64 -O /bin/grpc_health_probe && \
+    chmod +x /bin/grpc_health_probe && \
+    apt-get remove -y wget build-essential && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
+    
 # 의존성 파일만 먼저 복사하여 Docker 캐시 활용 극대화
 COPY requirements.txt .
 

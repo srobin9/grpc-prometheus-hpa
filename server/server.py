@@ -5,13 +5,16 @@ import logging
 import os
 import sys
 
-# --- OpenTelemetry 설정 ---
-from opentelemetry import metrics
-from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter
+# --- OpenTelemetry의 핵심 SDK 및 Resource 객체 ---
 from opentelemetry.sdk.metrics import MeterProvider
-from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
-from opentelemetry.instrumentation.grpc import GrpcInstrumentorServer
 from opentelemetry.sdk.resources import Resource
+# --- Prometheus Exporter 관련 클래스 ---
+from opentelemetry.exporter.prometheus import PrometheusMetricReader
+# Prometheus 웹 서버를 시작하기 위한 함수 import
+from prometheus_client import start_http_server, Gauge
+
+# --- gRPC Observability 플러그인 ---
+import grpc_observability
 
 # Protobuf 및 헬스 체크 관련 import
 import streaming_pb2
@@ -19,81 +22,95 @@ import streaming_pb2_grpc
 from grpc_health.v1 import health, health_pb2, health_pb2_grpc
 
 # --- 로깅 설정 ---
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     stream=sys.stdout)
-logging.getLogger("opentelemetry").setLevel(logging.DEBUG)
 
-# --- OpenTelemetry 메트릭 설정 ---
-otel_collector_endpoint = os.getenv("OTEL_COLLECTOR_ENDPOINT", "localhost:4317")
-logging.info(f"Sending metrics to OTEL Collector at: {otel_collector_endpoint}")
-
-exporter = OTLPMetricExporter(endpoint=otel_collector_endpoint, insecure=True, timeout=10)
-reader = PeriodicExportingMetricReader(exporter, export_interval_millis=5000)
-
-# 모든 메트릭에 'service.name' 레이블을 추가하여 식별 가능하게 만듭니다.
-resource = Resource(attributes={
-    "service.name": "vac-hub-service"
-})
-
-provider = MeterProvider(metric_readers=[reader], resource=resource)
-metrics.set_meter_provider(provider)
-
-# gRPC 서버 자동 계측
-grpc_server_instrumentor = GrpcInstrumentorServer()
-grpc_server_instrumentor.instrument()
-
-# 커스텀 메트릭 생성
-meter = metrics.get_meter("grpc.server.python.streaming_service")
-processed_message_counter = meter.create_counter(
-    name="app.messages.processed.count",
+# --- OpenTelemetry 설정 ---
+resource = Resource(attributes={"service.name": "vac-hub-service"})
+prometheus_reader = PrometheusMetricReader()
+provider = MeterProvider(metric_readers=[prometheus_reader], resource=resource)
+otel_plugin = grpc_observability.OpenTelemetryPlugin(meter_provider=provider)
+otel_plugin.register_global()
+custom_meter = provider.get_meter("grpc.server.python.streaming_service.custom")
+processed_message_counter = custom_meter.create_counter(
+    name="app_messages_processed_count",
     unit="1",
     description="The total number of messages processed by the streaming service"
 )
 
-# StreamerService 클래스
+# 이 메트릭은 /metrics 엔드포인트에 'grpc_server_active_streams' 라는 이름으로 노출됩니다.
+active_streams_gauge = Gauge(
+    'grpc_server_active_streams',
+    'The number of currently active gRPC streams.'
+)
+
+# 스트리밍 요청 처리 클래스
 class StreamerService(streaming_pb2_grpc.StreamerServicer):
-    """gRPC 스트리밍 서비스 구현"""
+    #클라이언트로부터 들어오는 grpc 스트림 요청의 실제 처리 로직을 담은 함수
     def ProcessTextStream(self, request_iterator, context):
-        logging.info("Stream opened.")
+        # ★★★ 시작: 요청이 시작되면 Gauge를 1 증가시킵니다 ★★★
+        active_streams_gauge.inc()
+        logging.info("Stream opened. Active streams: %s", active_streams_gauge._value.get())
+        
         message_count = 0
         try:
             for request in request_iterator:
                 message_count += 1
                 processed_message_counter.add(1)
                 time.sleep(0.01)
-
-            logging.info(f"Stream closed. Processed {message_count} messages.")
+            logging.info(f"Stream closed normally. Processed {message_count} messages.")
             return streaming_pb2.TextResponse(message_count=message_count)
+        
         except grpc.RpcError as e:
-            # 에러의 상태 코드를 확인합니다.
-            if e.code() == grpc.StatusCode.CANCELLED:
-                # 클라이언트가 스트림을 정상적으로 (또는 의도적으로) 취소한 경우 INFO로 기록합니다.
+            if isinstance(e, grpc.Call) and e.code() == grpc.StatusCode.CANCELLED:
                 logging.info(f"Stream cancelled by client after {message_count} messages.")
             else:
-                # 그 외 예측하지 못한 RpcError는 ERROR로 기록합니다.
-                logging.error(f"Stream broken by unexpected RpcError: {e}. Processed {message_count} messages.")
-            
-            # 클라이언트가 이미 떠났으므로 응답을 보내는 것은 의미가 없을 수 있지만, 
-            # 로직상 리턴 구문은 유지합니다.
+                logging.warning(f"An RPC error occurred: {e}")
             return streaming_pb2.TextResponse(message_count=message_count)
-
+            
+        # ★★★ 시작: 요청이 어떻게 끝나든(성공, 실패, 취소) 반드시 Gauge를 1 감소시킵니다 ★★★
+        finally:
+            active_streams_gauge.dec()
+            logging.info("Stream finished. Active streams: %s", active_streams_gauge._value.get())
+            
 def serve():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server_options = [
+        # 테스트를 위해 1분으로 설정 (실제 환경에서는 5~10분으로 조정)
+        ('grpc.max_connection_age_ms', 60000), 
+        # GOAWAY 신호를 보낸 후, 클라이언트가 진행 중인 요청을 마무리할 수 있도록 
+        # 30초의 유예 시간을 줍니다. 이 시간 동안은 연결이 바로 끊기지 않습니다.
+        ('grpc.max_connection_age_grace_ms', 30000)
+    ]
+    
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=10),
+        options=server_options
+    )
+    
     streaming_pb2_grpc.add_StreamerServicer_to_server(StreamerService(), server)
 
+    # 헬스 체크 서비스 추가
     health_servicer = health.HealthServicer()
     health_pb2_grpc.add_HealthServicer_to_server(health_servicer, server)
+    
+    # 기본적으로 전체 서비스("")를 SERVING 상태로 설정
+    # Kubernetes의 gRPC 프로브가 이 상태를 확인합니다.
     health_servicer.set("", health_pb2.HealthCheckResponse.SERVING)
-
+    
     server.add_insecure_port("[::]:50051")
     server.start()
-    logging.info("gRPC server started on port 50051.")
+    logging.info(f"gRPC server started on port 50051 with max_connection_age={server_options[0][1]}ms, grace={server_options[1][1]}ms.")
     server.wait_for_termination()
 
 if __name__ == "__main__":
     try:
+        # /metrics 엔드포인트를 제공할 HTTP 서버를 시작합니다
+        start_http_server(port=9464, addr='0.0.0.0')
+        logging.info("Prometheus metrics server started on port 9464.")
+        
         serve()
     finally:
-        logging.info("Flushing remaining metrics before exit.")
-        metrics.get_meter_provider().shutdown()
+        logging.info("Shutting down...")
+        otel_plugin.deregister_global()
+        provider.shutdown()

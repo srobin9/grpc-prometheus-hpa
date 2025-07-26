@@ -36,31 +36,8 @@ spec:
   default:
     # 유휴 연결 타임아웃 (길게 설정)
     timeoutSec: 600
----        
-# 4. 애플리케이션 Service (ClusterIP)
-# HealthCheckPolicy를 어노테이션으로 연결
-apiVersion: v1
-kind: Service
-metadata:
-  name: vac-hub-test-svc
-  namespace: grpc-test
-  annotations:
-    # Gateway API가 Pod를 직접 타겟팅(NEG)하도록 설정
-    cloud.google.com/neg: '{"gateway": true}'
-spec:
-  type: ClusterIP
-  selector:
-    app: vac-hub-test
-  ports:
-  - name: grpc
-    protocol: TCP
-    port: 50051
-    targetPort: 50051
-    # ADDED: 이 포트가 gRPC 프로토콜을 사용함을 명시적으로 알려줍니다.
-    # appProtocol: GRPC
-    appProtocol: kubernetes.io/h2c
 ---
-# 5. Kubernetes Gateway: GKE에 Cloud Load Balancer 생성을 요청합니다.
+# 4. Kubernetes Gateway: GKE에 Cloud Load Balancer 생성을 요청합니다.
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
