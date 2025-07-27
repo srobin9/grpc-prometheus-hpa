@@ -88,7 +88,7 @@
     export IMAGE_TAG=$(date -u +%Y%m%d-%H%M%S)
     echo "New image tag: $IMAGE_TAG"
     
-    gcloud builds submit . -tag="${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
+    gcloud builds submit . --tag="${REGION}-docker.pkg.dev/${PROJECT_ID}/grpc-test-repo/vac-hub-test:${IMAGE_TAG}"
     ```
 ---
 
