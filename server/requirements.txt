@@ -1,4 +1,4 @@
-# server/requirements.txt (진짜 최종 결정안)
+# server/requirements.txt
 
 grpcio>=1.62.3
 grpcio-observability>=1.62.3

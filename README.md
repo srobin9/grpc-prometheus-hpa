@@ -198,7 +198,10 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     cd ~/grpc-prometheus-hpa
     source venv/bin/activate
     cd ~/grpc-prometheus-hpa/client
-    
+
+    # 4. gRPC 라잉브러리 설치 (필요시)
+    pip install -r requirements.txt
+
     # 4. 클라이언트 실행 (스트림 수를 늘려 부하를 발생시킵니다)
     python client.py [GATEWAY_EXTERNAL_IP]:443 --streams 15 --cert_file ./tls.crt
     ```
