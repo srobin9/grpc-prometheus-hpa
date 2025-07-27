@@ -50,7 +50,6 @@
     ```
 
 4.  **GKE Autopilot 클러스터 생성:**
-    *   `--enable-managed-prometheus` 플래그는 Autopilot에서 기본값이므로 생략 가능합니다.
     ```bash
     gcloud container clusters create-auto $CLUSTER_NAME \
         --release-channel=regular \
