@@ -189,13 +189,17 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     ```bash
     # 1. 서버 인증서 파일을 클라이언트 디렉토리로 복사
     cp ~/grpc-prometheus-hpa/k8s/tls.crt ~/grpc-prometheus-hpa/client/
-    
-    # 2. 가상환경 활성화 및 client 디렉토리로 이동
+
+    # 2. Python 가상 환경 생성 (필요시)
+    cd ~/grpc-prometheus-hpa
+    python3 -m venv venv
+
+    # 3. 가상환경 활성화 및 client 디렉토리로 이동
     cd ~/grpc-prometheus-hpa
     source venv/bin/activate
     cd ~/grpc-prometheus-hpa/client
     
-    # 3. 클라이언트 실행 (스트림 수를 늘려 부하를 발생시킵니다)
+    # 4. 클라이언트 실행 (스트림 수를 늘려 부하를 발생시킵니다)
     python client.py [GATEWAY_EXTERNAL_IP]:443 --streams 15 --cert_file ./tls.crt
     ```
     ![Client 실행 결과](./image/Client_running.png)
