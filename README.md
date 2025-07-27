@@ -32,7 +32,7 @@
     ```bash
     export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
     export REGION=$(gcloud config list --format 'value(compute.region)')
-    export CLUSTER_NAME=[YOUR_CLUSTER_NAME] # grpc-otel-test
+    export CLUSTER_NAME=[YOUR_CLUSTER_NAME] # grpc-prometheus-hpa
 
     echo $PROJECT_ID
     echo $REGION
