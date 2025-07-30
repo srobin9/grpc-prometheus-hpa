@@ -76,11 +76,11 @@ class StreamerService(streaming_pb2_grpc.StreamerServicer):
             
 def serve():
     server_options = [
-        # 테스트를 위해 1분으로 설정 (실제 환경에서는 5~10분으로 조정)
-        ('grpc.max_connection_age_ms', 60000), 
+        # 10분으로 설정
+        ('grpc.max_connection_age_ms', 600000), 
         # GOAWAY 신호를 보낸 후, 클라이언트가 진행 중인 요청을 마무리할 수 있도록 
-        # 30초의 유예 시간을 줍니다. 이 시간 동안은 연결이 바로 끊기지 않습니다.
-        ('grpc.max_connection_age_grace_ms', 30000)
+        # 60초의 유예 시간을 줍니다. 이 시간 동안은 연결이 바로 끊기지 않습니다.
+        ('grpc.max_connection_age_grace_ms', 60000)
     ]
     
     server = grpc.server(

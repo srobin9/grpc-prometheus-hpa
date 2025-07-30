@@ -4,7 +4,7 @@ metadata:
   name: vac-hub-test
   namespace: grpc-test
 spec:
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: vac-hub-test
