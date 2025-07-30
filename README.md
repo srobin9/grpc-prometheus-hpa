@@ -23,6 +23,7 @@
 1.  **gcloud 프로젝트 설정:**
     ```bash
     # (이미 설정하셨다면 생략)
+    gcloud init 
     gcloud auth login 
     gcloud config set project [YOUR_PROJECT_ID]
     gcloud config set compute/region [YOUR_REGION] #asia-northeast3

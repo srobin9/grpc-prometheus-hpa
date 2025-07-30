@@ -8,8 +8,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: vac-hub-test
-  minReplicas: 5
-  maxReplicas: 50
+  minReplicas: 3
+  maxReplicas: 10
   metrics:
   - type: Resource
     resource:

@@ -13,14 +13,29 @@
 
 ### 테스트 실행 및 결과 분석
 
-1.  **터미널에서 다음 명령어로 클라이언트를 실행합니다.**
+1.  **Gateway Backend Protocol 및 외부 IP 확인:**
+    ```bash
+    kubectl get gateway vac-hub-gateway -n grpc-test
+    ```
+    `ADDRESS` 필드에 나타나는 IP 주소를 복사합니다.
+
+2.  **터미널에서 다음 명령어로 클라이언트를 실행합니다.**
     *   채널 3개, 스트림 30개로 테스트합니다.
 
     ```bash
+    # 1. 가상환경 활성화 및 client 디렉토리로 이동
+    cd ~/grpc-prometheus-hpa
+    source venv/bin/activate
+    cd ~/grpc-prometheus-hpa/client
+
+    # 2. gRPC 라이브러리 설치 (필요시)
+    pip install -r requirements.txt
+
+    # 3. client 실행
     python client_channel_test.py [GATEWAY_EXTERNAL_IP]:443 --channels 3 --streams 30 --cert_file ./tls.crt
     ```
 
-2.  **서버 Pod의 로그를 확인합니다.**
+3.  **서버 Pod의 로그를 확인합니다.**
     *   각 Pod의 로그를 모니터링하여 어떤 스트림이 어느 Pod으로 들어오는지 확인합니다. 서버 로그는 `logging.info("Stream opened. ...")` 부분을 통해 스트림 시작을 알려줍니다.
 
     ```bash
