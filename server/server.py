@@ -1,25 +1,22 @@
-import time
+import asyncio
 import grpc
-from concurrent import futures
 import logging
-import os
 import sys
-
-# --- OpenTelemetry의 핵심 SDK 및 Resource 객체 ---
-from opentelemetry.sdk.metrics import MeterProvider
-from opentelemetry.sdk.resources import Resource
-# --- Prometheus Exporter 관련 클래스 ---
-from opentelemetry.exporter.prometheus import PrometheusMetricReader
-# Prometheus 웹 서버를 시작하기 위한 함수 import
-from prometheus_client import start_http_server, Gauge
-
-# --- gRPC Observability 플러그인 ---
-import grpc_observability
+import time
 
 # Protobuf 및 헬스 체크 관련 import
 import streaming_pb2
 import streaming_pb2_grpc
-from grpc_health.v1 import health, health_pb2, health_pb2_grpc
+from grpc_health.v1 import health_pb2, health_pb2_grpc
+
+# OpenTelemetry 및 Prometheus 관련 import
+from opentelemetry.sdk.metrics import MeterProvider
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.exporter.prometheus import PrometheusMetricReader
+from prometheus_client import start_http_server, Gauge
+
+# 공식 gRPC 계측 라이브러리 import
+from opentelemetry.instrumentation.grpc import GrpcAioInstrumentorServer
 
 # --- 로깅 설정 ---
 logging.basicConfig(level=logging.INFO,
@@ -30,16 +27,34 @@ logging.basicConfig(level=logging.INFO,
 resource = Resource(attributes={"service.name": "vac-hub-service"})
 prometheus_reader = PrometheusMetricReader()
 provider = MeterProvider(metric_readers=[prometheus_reader], resource=resource)
-otel_plugin = grpc_observability.OpenTelemetryPlugin(meter_provider=provider)
-otel_plugin.register_global()
+
+# gRPC 비동기 서버 계측
+GrpcAioInstrumentorServer().instrument(meter_provider=provider)
+
+# 비동기 호환 Health Servicer
+class AsyncHealthServicer(health_pb2_grpc.HealthServicer):
+    def __init__(self):
+        self._server_status = {"": health_pb2.HealthCheckResponse.SERVING}
+        self._lock = asyncio.Lock()
+
+    async def Check(self, request, context):
+        async with self._lock:
+            status = self._server_status.get(request.service)
+            if status is None:
+                context.set_code(grpc.StatusCode.NOT_FOUND)
+                return health_pb2.HealthCheckResponse()
+            return health_pb2.HealthCheckResponse(status=status)
+
+    def set(self, service, status):
+        self._server_status[service] = status
+
+# 커스텀 메트릭 정의
 custom_meter = provider.get_meter("grpc.server.python.streaming_service.custom")
 processed_message_counter = custom_meter.create_counter(
     name="app_messages_processed_count",
     unit="1",
     description="The total number of messages processed by the streaming service"
 )
-
-# 이 메트릭은 /metrics 엔드포인트에 'grpc_server_active_streams' 라는 이름으로 노출됩니다.
 active_streams_gauge = Gauge(
     'grpc_server_active_streams',
     'The number of currently active gRPC streams.'
@@ -47,70 +62,81 @@ active_streams_gauge = Gauge(
 
 # 스트리밍 요청 처리 클래스
 class StreamerService(streaming_pb2_grpc.StreamerServicer):
-    #클라이언트로부터 들어오는 grpc 스트림 요청의 실제 처리 로직을 담은 함수
-    def ProcessTextStream(self, request_iterator, context):
-        # ★★★ 시작: 요청이 시작되면 Gauge를 1 증가시킵니다 ★★★
+    async def ProcessTextStream(self, request_iterator, context):
         active_streams_gauge.inc()
-        logging.info("Stream opened. Active streams: %s", active_streams_gauge._value.get())
-        
+        log_prefix = "[Client: Unknown, Channel: Unknown]"
         message_count = 0
+        
         try:
-            for request in request_iterator:
+            # <<< [핵심 수정] Python 3.9와 호환되도록 __anext__() 와 예외 처리를 사용합니다. >>>
+            try:
+                first_request = await request_iterator.__anext__()
+            except StopAsyncIteration:
+                first_request = None
+            
+            if not first_request:
+                logging.info("Stream opened but received no messages.")
+                return streaming_pb2.TextResponse(message_count=0)
+
+            client_id = first_request.client_id
+            channel_id = first_request.channel_id
+            log_prefix = f"[Client: {client_id}, Channel: {channel_id}]"
+            logging.info(f"{log_prefix} Stream opened. Active streams: {active_streams_gauge._value.get()}")
+            message_count = 1
+            processed_message_counter.add(1)
+
+            async for request in request_iterator:
                 message_count += 1
                 processed_message_counter.add(1)
-                time.sleep(0.01)
-            logging.info(f"Stream closed normally. Processed {message_count} messages.")
+                await asyncio.sleep(0.01)
+
+            logging.info(f"{log_prefix} Stream closed normally by client. Processed {message_count} messages.")
             return streaming_pb2.TextResponse(message_count=message_count)
         
-        except grpc.RpcError as e:
-            if isinstance(e, grpc.Call) and e.code() == grpc.StatusCode.CANCELLED:
-                logging.info(f"Stream cancelled by client after {message_count} messages.")
+        except grpc.aio.AioRpcError as e:
+            if e.code() == grpc.StatusCode.CANCELLED:
+                logging.info(f"{log_prefix} Stream cancelled by client after {message_count} messages.")
             else:
-                logging.warning(f"An RPC error occurred: {e}")
+                logging.warning(f"{log_prefix} An RPC error occurred: code={e.code()}, details={e.details()}")
             return streaming_pb2.TextResponse(message_count=message_count)
             
-        # ★★★ 시작: 요청이 어떻게 끝나든(성공, 실패, 취소) 반드시 Gauge를 1 감소시킵니다 ★★★
         finally:
             active_streams_gauge.dec()
-            logging.info("Stream finished. Active streams: %s", active_streams_gauge._value.get())
-            
-def serve():
+            logging.info(f"{log_prefix} Stream finished. Active streams: {active_streams_gauge._value.get()}")
+
+# 비동기 서버 실행 함수
+async def serve():
     server_options = [
-        # 10분으로 설정
+        # 10분마다 연결을 종료하도록 설정
         ('grpc.max_connection_age_ms', 600000), 
-        # GOAWAY 신호를 보낸 후, 클라이언트가 진행 중인 요청을 마무리할 수 있도록 
-        # 60초의 유예 시간을 줍니다. 이 시간 동안은 연결이 바로 끊기지 않습니다.
-        ('grpc.max_connection_age_grace_ms', 60000)
+        # 10분 연결 종료 후 60초의 유예 시간을 줌
+        ('grpc.max_connection_age_grace_ms', 60000),
+        # --- [핵심 추가] 연결 종료 시간에 무작위성을 부여합니다 ---
+        # 0.1은 10%를 의미. 즉, 10분의 10%인 1분(60초) 내에서
+        # 연결 종료 시점을 무작위로 분산시킵니다.
+        ('grpc.max_connection_age_jitter', 0.1) 
     ]
     
-    server = grpc.server(
-        futures.ThreadPoolExecutor(max_workers=10),
-        options=server_options
-    )
+    server = grpc.aio.server(options=server_options)
     
     streaming_pb2_grpc.add_StreamerServicer_to_server(StreamerService(), server)
-
-    # 헬스 체크 서비스 추가
-    health_servicer = health.HealthServicer()
+    
+    health_servicer = AsyncHealthServicer()
     health_pb2_grpc.add_HealthServicer_to_server(health_servicer, server)
     
-    # 기본적으로 전체 서비스("")를 SERVING 상태로 설정
-    # Kubernetes의 gRPC 프로브가 이 상태를 확인합니다.
-    health_servicer.set("", health_pb2.HealthCheckResponse.SERVING)
-    
     server.add_insecure_port("[::]:50051")
-    server.start()
+    await server.start()
     logging.info(f"gRPC server started on port 50051 with max_connection_age={server_options[0][1]}ms, grace={server_options[1][1]}ms.")
-    server.wait_for_termination()
+    await server.wait_for_termination()
 
+# 메인 실행부
 if __name__ == "__main__":
     try:
-        # /metrics 엔드포인트를 제공할 HTTP 서버를 시작합니다
         start_http_server(port=9464, addr='0.0.0.0')
         logging.info("Prometheus metrics server started on port 9464.")
-        
-        serve()
+        asyncio.run(serve())
+    except KeyboardInterrupt:
+        logging.info("Shutting down due to KeyboardInterrupt...")
     finally:
         logging.info("Shutting down...")
-        otel_plugin.deregister_global()
         provider.shutdown()

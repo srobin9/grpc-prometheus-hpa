@@ -28,5 +28,5 @@ spec:
       target:
         # 목표: 파드당 평균 동시 활성 스트림 수
         type: AverageValue
-        # 예: 파드당 평균 10개의 스트림을 동시에 처리하기 시작하면 스케일 아웃
-        averageValue: "10"
+        # 예: 파드당 평균 15개의 스트림을 동시에 처리하기 시작하면 스케일 아웃
+        averageValue: "15"

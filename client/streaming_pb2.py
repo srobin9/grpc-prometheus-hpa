@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fstreaming.proto\x12\tstreaming\"\x1e\n\x0bTextRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\"%\n\x0cTextResponse\x12\x15\n\rmessage_count\x18\x01 \x01(\x05\x32R\n\x08Streamer\x12\x46\n\x11ProcessTextStream\x12\x16.streaming.TextRequest\x1a\x17.streaming.TextResponse(\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0fstreaming.proto\x12\tstreaming\"E\n\x0bTextRequest\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\x12\n\nchannel_id\x18\x02 \x01(\x05\x12\x11\n\tclient_id\x18\x03 \x01(\t\"%\n\x0cTextResponse\x12\x15\n\rmessage_count\x18\x01 \x01(\x05\x32R\n\x08Streamer\x12\x46\n\x11ProcessTextStream\x12\x16.streaming.TextRequest\x1a\x17.streaming.TextResponse(\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,9 +22,9 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'streaming_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_TEXTREQUEST']._serialized_start=30
-  _globals['_TEXTREQUEST']._serialized_end=60
-  _globals['_TEXTRESPONSE']._serialized_start=62
-  _globals['_TEXTRESPONSE']._serialized_end=99
-  _globals['_STREAMER']._serialized_start=101
-  _globals['_STREAMER']._serialized_end=183
+  _globals['_TEXTREQUEST']._serialized_end=99
+  _globals['_TEXTRESPONSE']._serialized_start=101
+  _globals['_TEXTRESPONSE']._serialized_end=138
+  _globals['_STREAMER']._serialized_start=140
+  _globals['_STREAMER']._serialized_end=222
 # @@protoc_insertion_point(module_scope)

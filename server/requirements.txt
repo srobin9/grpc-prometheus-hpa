@@ -1,7 +1,6 @@
 # server/requirements.txt
 
 grpcio>=1.62.3
-grpcio-observability>=1.62.3
 grpcio-tools>=1.62.3
 grpcio-health-checking>=1.62.3
 
@@ -10,3 +9,5 @@ opentelemetry-exporter-prometheus>=0.46b0
 
 # Prometheus 웹 서버를 시작하기 위한 라이브러리 명시
 prometheus-client>=0.20.0
+
+opentelemetry-instrumentation-grpc

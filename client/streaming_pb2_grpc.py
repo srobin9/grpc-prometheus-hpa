@@ -25,8 +25,7 @@ class StreamerServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def ProcessTextStream(self, request_iterator, context):
-        """클라이언트가 텍스트 스트림을 보내는 RPC
-        """
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')

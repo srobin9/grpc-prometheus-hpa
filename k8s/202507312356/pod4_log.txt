@@ -1,0 +1,40 @@
+--- Installed packages inside container: ---
+Package                            Version
+---------------------------------- -------
+grpcio                             1.74.0
+grpcio-health-checking             1.74.0
+grpcio-tools                       1.74.0
+importlib_metadata                 8.7.0
+opentelemetry-api                  1.36.0
+opentelemetry-exporter-prometheus  0.57b0
+opentelemetry-instrumentation      0.57b0
+opentelemetry-instrumentation-grpc 0.57b0
+opentelemetry-sdk                  1.36.0
+opentelemetry-semantic-conventions 0.57b0
+packaging                          25.0
+pip                                23.0.1
+prometheus_client                  0.22.1
+protobuf                           6.31.1
+setuptools                         58.1.0
+typing_extensions                  4.14.1
+wheel                              0.45.1
+wrapt                              1.17.2
+zipp                               3.23.0
+
+[notice] A new release of pip is available: 23.0.1 -> 25.2
+[notice] To update, run: pip install --upgrade pip
+--- Starting server ---
+2025-07-31 14:45:44,825 - root - INFO - Prometheus metrics server started on port 9464.
+2025-07-31 14:45:44,835 - root - INFO - gRPC server started on port 50051 with max_connection_age=600000ms, grace=60000ms.
+2025-07-31 14:48:01,862 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 1.0
+2025-07-31 14:48:01,872 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 2.0
+2025-07-31 14:48:01,874 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 3.0
+2025-07-31 14:52:42,638 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 14:52:42,641 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 14:52:42,650 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 14:52:56,918 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 14:52:56,918 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 14:52:56,919 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 14:52:56,919 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 14:54:35,632 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 14:54:35,635 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 12.0

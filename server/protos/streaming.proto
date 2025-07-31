@@ -2,15 +2,20 @@ syntax = "proto3";
 
 package streaming;
 
+// 서비스 정의
 service Streamer {
   // 클라이언트가 텍스트 스트림을 보내는 RPC
   rpc ProcessTextStream(stream TextRequest) returns (TextResponse);
 }
 
+// 요청 메시지: 스트림 식별을 위해 channel_id 추가
 message TextRequest {
   string message = 1;
+  int32 channel_id = 2; // <<< 이 필드를 추가하세요
+  string client_id = 3; // 클라이언트 식별자 필드 추가  
 }
 
+// 응답 메시지
 message TextResponse {
   int32 message_count = 1;
 }
