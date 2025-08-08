@@ -187,6 +187,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     ![GCLB 프로비저닝 결과](./image/GCLB_provisioning.png)
 
 3-1.  **클라이언트 실행:**
+
     ```bash
     # 1. 서버 인증서 파일을 클라이언트 디렉토리로 복사
     cp ~/grpc-prometheus-hpa/k8s/tls.crt ~/grpc-prometheus-hpa/client/
@@ -212,12 +213,13 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     다수의 Grpc 클라이언트에서 각각 3개의 grpc channel을 생성한 후 각 채널별로 10개의 스트림을 생성하여 서버측의 부하 분산을 테스트합니다. 
     (1) ~/grpc-prometheus-hpa/client 폴더의 deploy_and_run.sh을 열어서 환경 변수를 설정합니다. 
     (2) 해당 Shell script를 원하는 클라이언트 갯수만큼 실행합니다. 
+    
     ```bash
     cd ~/grpc-prometheus-hpa/client
     chmod +x deploy_and_run.sh
     ./deploy_and_run
     ```
-    
+
 4.  **서버 POD 동작 확인:**
     *   새 터미널을 열고 첫번째 서버 POD의 변화를 실시간으로 확인합니다.
     ```bash
