@@ -1,3 +1,4 @@
+# Async 방식으로 grpc 트래픽 처리
 import asyncio
 import grpc
 import logging

@@ -1,3 +1,4 @@
+# Sync 방식으로 Grpc traffic 처리
 import time
 import grpc
 from concurrent import futures

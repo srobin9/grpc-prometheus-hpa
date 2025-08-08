@@ -3,14 +3,14 @@
 # --- 스크립트를 시작하기 전에 이 변수들을 설정하세요 ---
 
 # 1. Google Cloud 프로젝트 ID
-PROJECT_ID="p-khm8-dev-svc"
+PROJECT_ID=""
 
 # 2. GCE VM을 생성할 위치와 이름
-GCE_ZONE="asia-northeast3-c"
-GCE_INSTANCE_NAME="grpc-client-vm-6" # 이 부분은 grpc-client-vm-1, 2, 3 등으로 바꿔서 실행
+GCE_ZONE=""
+GCE_INSTANCE_NAME="grpc-client-vm-1" # 이 부분은 grpc-client-vm-1, 2, 3 등으로 바꿔서 실행
 
 # 3. 테스트할 gRPC 서버의 외부 IP 주소
-SERVER_IP="34.102.148.180"
+SERVER_IP=""
 
 # 4. 로컬에 준비해둔 클라이언트 파일들이 있는 디렉토리
 LOCAL_DIR="."
@@ -38,7 +38,6 @@ else
   echo "    '$GCE_INSTANCE_NAME' VM이 이미 존재합니다. 생성을 건너뜁니다."
 fi
 
-# --- [핵심 수정] ---
 # 단계 A: 원격지 디렉토리를 로컬에서 먼저 깨끗하게 정리합니다.
 echo ">>> 3A. GCE VM의 원격 디렉토리를 강제로 초기화합니다..."
 gcloud compute ssh $GCE_INSTANCE_NAME --zone $GCE_ZONE --command "pkill -9 -f client_multiplex.py || true; rm -rf ${REMOTE_DIR}; mkdir -p ${REMOTE_DIR}" --troubleshoot
@@ -64,13 +63,11 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get update -yq > /dev/null
 # python3-pip와 함께 가상 환경을 위한 python3-venv 설치
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq python3-pip python3-venv > /dev/null
 
-# --- [핵심 수정 사항] ---
 echo '    [VM] 파이썬 가상 환경 생성 및 활성화...'
 # venv 라는 이름의 가상 환경 디렉토리 생성
 python3 -m venv venv
 # 생성된 가상 환경 활성화
 source venv/bin/activate
-# --- [수정 끝] ---
 
 echo '    [VM] requirements.txt로 파이썬 패키지 설치 (가상 환경 내부)...'
 if [ -f "requirements.txt" ]; then
