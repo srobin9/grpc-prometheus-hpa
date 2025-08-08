@@ -1,0 +1,1434 @@
+--- Installed packages inside container: ---
+Package                            Version
+---------------------------------- -------
+grpcio                             1.74.0
+grpcio-health-checking             1.74.0
+grpcio-tools                       1.74.0
+importlib_metadata                 8.7.0
+opentelemetry-api                  1.36.0
+opentelemetry-exporter-prometheus  0.57b0
+opentelemetry-instrumentation      0.57b0
+opentelemetry-instrumentation-grpc 0.57b0
+opentelemetry-sdk                  1.36.0
+opentelemetry-semantic-conventions 0.57b0
+packaging                          25.0
+pip                                23.0.1
+prometheus_client                  0.22.1
+protobuf                           6.31.1
+setuptools                         58.1.0
+typing_extensions                  4.14.1
+wheel                              0.45.1
+wrapt                              1.17.2
+zipp                               3.23.0
+
+[notice] A new release of pip is available: 23.0.1 -> 25.2
+[notice] To update, run: pip install --upgrade pip
+--- Starting server ---
+2025-07-31 14:25:00,062 - root - INFO - Prometheus metrics server started on port 9464.
+2025-07-31 14:25:00,179 - root - INFO - gRPC server started on port 50051 with max_connection_age=600000ms, grace=60000ms.
+2025-07-31 14:48:01,861 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 1.0
+2025-07-31 14:48:01,862 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 2.0
+2025-07-31 14:48:01,872 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 3.0
+2025-07-31 14:52:42,639 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 14:52:42,641 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 14:52:42,648 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 14:52:56,918 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 14:52:56,919 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 14:53:01,143 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 14:54:35,632 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 14:56:53,098 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 14:56:53,099 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 14:58:25,401 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3124 messages.
+2025-07-31 14:58:25,401 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 14:58:25,402 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3070 messages.
+2025-07-31 14:58:25,402 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 14:59:50,665 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3524 messages.
+2025-07-31 14:59:50,665 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 15:02:21,748 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 15:02:21,749 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 15:02:21,750 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 15:02:21,750 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 15:02:49,624 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3029 messages.
+2025-07-31 15:02:49,624 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 15:02:49,624 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 2985 messages.
+2025-07-31 15:02:49,624 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 15:03:14,783 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3075 messages.
+2025-07-31 15:03:14,784 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 15:03:35,203 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3161 messages.
+2025-07-31 15:03:35,203 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 15:03:50,140 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3309 messages.
+2025-07-31 15:03:50,140 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 15:04:37,662 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 15:04:37,664 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 15:04:43,808 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3540 messages.
+2025-07-31 15:04:43,809 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 15:04:46,548 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 15:04:53,834 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3120 messages.
+2025-07-31 15:04:53,834 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 15:06:07,764 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 15:07:39,477 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3220 messages.
+2025-07-31 15:07:39,477 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 15:08:02,777 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3331 messages.
+2025-07-31 15:08:02,777 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 15:08:50,040 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 15:08:50,041 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 15:08:52,740 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 15:08:52,741 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 15:08:52,741 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 15:12:37,053 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3092 messages.
+2025-07-31 15:12:37,053 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 15:13:35,408 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3373 messages.
+2025-07-31 15:13:35,408 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 15:13:35,408 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3378 messages.
+2025-07-31 15:13:35,408 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 15:13:46,101 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3399 messages.
+2025-07-31 15:13:46,101 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 15:13:47,342 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 15:13:47,345 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 15:13:47,345 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 15:14:17,663 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 15:14:54,509 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3040 messages.
+2025-07-31 15:14:54,509 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 15:15:01,946 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 2694 messages.
+2025-07-31 15:15:01,946 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 15:15:01,946 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3116 messages.
+2025-07-31 15:15:01,946 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 15:15:01,946 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 15:15:44,356 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 15:15:44,357 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 15:19:28,483 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3157 messages.
+2025-07-31 15:19:28,483 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 15:20:11,672 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3419 messages.
+2025-07-31 15:20:11,672 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 15:20:31,209 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3492 messages.
+2025-07-31 15:20:31,209 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 15:20:35,242 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3524 messages.
+2025-07-31 15:20:35,242 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 15:20:38,592 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3551 messages.
+2025-07-31 15:20:38,593 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 15:20:42,065 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 15:20:42,068 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 15:24:00,784 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3057 messages.
+2025-07-31 15:24:00,784 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 15:24:27,018 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3216 messages.
+2025-07-31 15:24:27,018 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 15:24:31,382 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3215 messages.
+2025-07-31 15:24:31,382 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 15:24:46,196 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3129 messages.
+2025-07-31 15:24:46,197 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 4.0
+2025-07-31 15:26:12,228 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3173 messages.
+2025-07-31 15:26:12,228 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 3.0
+2025-07-31 15:27:00,659 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3391 messages.
+2025-07-31 15:27:00,659 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 2.0
+2025-07-31 15:27:28,964 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 3.0
+2025-07-31 15:27:28,965 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 4.0
+2025-07-31 15:28:05,436 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 15:28:05,436 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 15:28:05,437 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 15:28:09,637 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 15:28:09,639 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 15:30:43,941 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 2975 messages.
+2025-07-31 15:30:43,941 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 15:31:31,573 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3251 messages.
+2025-07-31 15:31:31,573 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 15:32:57,365 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 15:32:57,365 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 15:35:27,791 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 15:35:27,791 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 15:35:40,575 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 15:35:40,576 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 14.0
+2025-07-31 15:35:40,576 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 14.0
+2025-07-31 15:37:39,078 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3046 messages.
+2025-07-31 15:37:39,078 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 15:38:08,850 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3030 messages.
+2025-07-31 15:38:08,851 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 15:38:29,329 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3157 messages.
+2025-07-31 15:38:29,329 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 15:39:05,929 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 15:39:45,348 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3469 messages.
+2025-07-31 15:39:45,348 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 15:39:45,348 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3496 messages.
+2025-07-31 15:39:45,348 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 15:40:00,112 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3550 messages.
+2025-07-31 15:40:00,112 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 15:42:14,762 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 15:42:14,763 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 15:43:37,847 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3194 messages.
+2025-07-31 15:43:37,847 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 15:43:56,045 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3290 messages.
+2025-07-31 15:43:56,045 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 15:43:56,045 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 2466 messages.
+2025-07-31 15:43:56,045 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 15:45:33,177 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3036 messages.
+2025-07-31 15:45:33,177 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 15:46:20,633 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3210 messages.
+2025-07-31 15:46:20,633 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 15:46:35,719 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3333 messages.
+2025-07-31 15:46:35,720 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 3.0
+2025-07-31 15:46:37,274 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3285 messages.
+2025-07-31 15:46:37,275 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 2.0
+2025-07-31 15:47:09,018 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 4.0
+2025-07-31 15:47:09,019 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 4.0
+2025-07-31 15:47:09,020 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 5.0
+2025-07-31 15:47:12,651 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 15:47:12,652 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 15:47:12,653 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 15:48:35,573 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 15:48:35,573 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 15:48:35,574 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 15:48:35,574 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 15:49:12,244 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 15:49:12,245 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 14.0
+2025-07-31 15:51:57,652 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 15.0
+2025-07-31 15:51:57,653 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 15:52:27,528 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 18.0
+2025-07-31 15:52:27,528 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 18.0
+2025-07-31 15:52:47,522 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3144 messages.
+2025-07-31 15:52:47,522 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 17.0
+2025-07-31 15:53:46,080 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3462 messages.
+2025-07-31 15:53:46,080 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 16.0
+2025-07-31 15:55:57,860 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 17.0
+2025-07-31 15:55:57,862 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 19.0
+2025-07-31 15:55:57,862 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 19.0
+2025-07-31 15:57:24,557 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3040 messages.
+2025-07-31 15:57:24,557 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 18.0
+2025-07-31 15:57:44,980 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3159 messages.
+2025-07-31 15:57:44,980 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 17.0
+2025-07-31 15:57:57,789 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3254 messages.
+2025-07-31 15:57:57,789 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 16.0
+2025-07-31 15:58:02,783 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 2671 messages.
+2025-07-31 15:58:02,783 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 15.0
+2025-07-31 15:58:02,784 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3250 messages.
+2025-07-31 15:58:02,784 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 15:58:03,222 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3256 messages.
+2025-07-31 15:58:03,222 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 15:58:40,697 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 15:58:41,876 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3051 messages.
+2025-07-31 15:58:41,877 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 15:59:07,820 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3146 messages.
+2025-07-31 15:59:07,821 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 15:59:12,159 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3618 messages.
+2025-07-31 15:59:12,159 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 16:00:30,380 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3573 messages.
+2025-07-31 16:00:30,380 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 16:01:02,375 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3552 messages.
+2025-07-31 16:01:02,376 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 16:01:05,955 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 16:02:17,864 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3108 messages.
+2025-07-31 16:02:17,864 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 16:02:54,385 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3287 messages.
+2025-07-31 16:02:54,385 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 16:02:57,502 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3142 messages.
+2025-07-31 16:02:57,502 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 16:03:43,394 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3403 messages.
+2025-07-31 16:03:43,394 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 16:04:12,450 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 5.0
+2025-07-31 16:04:20,866 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 16:04:20,867 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 16:04:31,883 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 16:04:31,883 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 16:06:08,591 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3040 messages.
+2025-07-31 16:06:08,591 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 16:07:36,128 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3446 messages.
+2025-07-31 16:07:36,128 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 16:07:51,182 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3576 messages.
+2025-07-31 16:07:51,183 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 16:07:53,657 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 16:07:53,657 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 16:12:07,978 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3318 messages.
+2025-07-31 16:12:07,978 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 16:12:07,978 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 2301 messages.
+2025-07-31 16:12:07,978 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 16:13:07,100 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 16:13:07,101 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 16:13:07,101 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 16:13:29,578 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 16:14:18,431 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3018 messages.
+2025-07-31 16:14:18,431 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 16:15:12,187 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 16:15:12,187 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 16:15:16,759 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3268 messages.
+2025-07-31 16:15:16,759 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 16:15:49,050 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3424 messages.
+2025-07-31 16:15:49,050 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 16:16:09,159 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 16:16:09,160 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 16:16:18,108 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 16:16:30,034 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3567 messages.
+2025-07-31 16:16:30,034 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 16:18:31,163 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3168 messages.
+2025-07-31 16:18:31,163 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 16:18:58,774 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3306 messages.
+2025-07-31 16:18:58,774 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 16:19:44,020 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 16:19:44,021 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 16:23:26,281 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 16:23:38,681 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3145 messages.
+2025-07-31 16:23:38,682 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 16:23:38,773 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3019 messages.
+2025-07-31 16:23:38,773 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 16:24:17,327 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 16:25:58,131 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3249 messages.
+2025-07-31 16:25:58,131 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 16:25:58,778 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3213 messages.
+2025-07-31 16:25:58,778 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 5.0
+2025-07-31 16:26:41,623 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3113 messages.
+2025-07-31 16:26:41,623 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 16:27:10,917 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 3.0
+2025-07-31 16:27:40,576 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3471 messages.
+2025-07-31 16:27:40,576 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 2.0
+2025-07-31 16:28:32,025 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 3.0
+2025-07-31 16:28:43,343 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 16:30:40,366 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3266 messages.
+2025-07-31 16:30:40,366 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 3.0
+2025-07-31 16:31:24,175 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3519 messages.
+2025-07-31 16:31:24,175 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 2.0
+2025-07-31 16:31:25,561 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 3.0
+2025-07-31 16:31:25,562 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 4.0
+2025-07-31 16:31:25,563 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 5.0
+2025-07-31 16:34:51,110 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 16:34:51,111 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 16:39:21,750 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 2386 messages.
+2025-07-31 16:39:21,750 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 16:39:21,751 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3173 messages.
+2025-07-31 16:39:21,751 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 16:39:21,751 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 4.0
+2025-07-31 16:39:56,409 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3416 messages.
+2025-07-31 16:39:56,409 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 3.0
+2025-07-31 16:40:01,353 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 16:40:01,354 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 16:40:03,139 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 16:40:03,139 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 16:40:03,140 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 16:40:03,141 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 16:42:05,961 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3229 messages.
+2025-07-31 16:42:05,961 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 16:45:07,154 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3099 messages.
+2025-07-31 16:45:07,155 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 16:46:28,345 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3505 messages.
+2025-07-31 16:46:28,345 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 16:48:07,839 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 16:48:07,840 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 16:48:07,841 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 16:48:54,013 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 16:48:54,013 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 16:50:15,572 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3056 messages.
+2025-07-31 16:50:15,573 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 16:50:17,352 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3070 messages.
+2025-07-31 16:50:17,352 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 16:50:24,268 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3076 messages.
+2025-07-31 16:50:24,268 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 16:50:52,890 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3234 messages.
+2025-07-31 16:50:52,891 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 16:50:53,503 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 16:50:53,505 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 16:51:02,368 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 16:51:02,369 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 16:51:02,370 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 16:51:02,371 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 16:51:02,613 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3286 messages.
+2025-07-31 16:51:02,614 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 16:51:49,063 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3543 messages.
+2025-07-31 16:51:49,063 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 16:52:24,521 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 16:52:24,522 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 16:59:02,516 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3278 messages.
+2025-07-31 16:59:02,516 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 16:59:43,350 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3483 messages.
+2025-07-31 16:59:43,350 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 16:59:49,148 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3520 messages.
+2025-07-31 16:59:49,148 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 16:59:50,510 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3280 messages.
+2025-07-31 16:59:50,511 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 16:59:50,511 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 2643 messages.
+2025-07-31 16:59:50,511 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 17:00:11,292 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 17:00:11,293 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 17:00:11,293 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 17:00:11,293 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 17:00:35,276 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3509 messages.
+2025-07-31 17:00:35,276 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 17:01:13,493 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3091 messages.
+2025-07-31 17:01:13,493 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 17:01:18,849 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3062 messages.
+2025-07-31 17:01:18,850 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 17:02:05,426 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3373 messages.
+2025-07-31 17:02:05,426 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 17:02:08,726 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3335 messages.
+2025-07-31 17:02:08,726 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 17:02:18,132 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 17:02:28,956 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3037 messages.
+2025-07-31 17:02:28,956 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 17:03:43,536 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 17:03:43,540 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 17:03:43,541 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 17:03:43,587 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 17:03:43,588 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 17:03:43,600 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 17:04:17,681 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3558 messages.
+2025-07-31 17:04:17,682 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 17:05:50,169 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 17:05:50,171 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 17:05:51,024 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 17:09:28,862 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 17:09:28,863 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 16.0
+2025-07-31 17:09:28,863 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 16.0
+2025-07-31 17:10:22,105 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3062 messages.
+2025-07-31 17:10:22,105 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 15.0
+2025-07-31 17:10:22,105 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3039 messages.
+2025-07-31 17:10:22,105 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 17:11:50,714 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3478 messages.
+2025-07-31 17:11:50,715 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 13.0
+2025-07-31 17:11:52,637 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3496 messages.
+2025-07-31 17:11:52,637 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 17:12:39,594 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 17:12:39,596 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 14.0
+2025-07-31 17:12:39,597 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 15.0
+2025-07-31 17:13:44,834 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3003 messages.
+2025-07-31 17:13:44,834 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 14.0
+2025-07-31 17:13:45,591 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 2998 messages.
+2025-07-31 17:13:45,591 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 13.0
+2025-07-31 17:13:58,226 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 2442 messages.
+2025-07-31 17:13:58,226 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 17:13:58,226 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3078 messages.
+2025-07-31 17:13:58,227 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 17:14:16,214 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 17:14:16,215 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 17:14:20,984 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3228 messages.
+2025-07-31 17:14:20,984 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 17:14:37,133 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3272 messages.
+2025-07-31 17:14:37,133 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 17:15:26,779 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3539 messages.
+2025-07-31 17:15:26,779 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 17:15:45,647 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 17:15:45,648 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 17:15:45,648 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 17:16:18,208 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3155 messages.
+2025-07-31 17:16:18,208 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 17:16:24,670 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3195 messages.
+2025-07-31 17:16:24,670 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 17:17:05,227 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 17:17:05,228 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 17:17:05,229 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 14.0
+2025-07-31 17:18:40,755 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 15.0
+2025-07-31 17:19:34,212 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 2995 messages.
+2025-07-31 17:19:34,212 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 14.0
+2025-07-31 17:21:11,336 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3523 messages.
+2025-07-31 17:21:11,336 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 17:21:19,518 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3569 messages.
+2025-07-31 17:21:19,518 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 17:22:49,042 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3081 messages.
+2025-07-31 17:22:49,042 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 17:23:46,435 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3324 messages.
+2025-07-31 17:23:46,435 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 17:23:46,436 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 17:24:43,644 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 17:25:13,310 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3274 messages.
+2025-07-31 17:25:13,310 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 17:26:04,478 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3095 messages.
+2025-07-31 17:26:04,478 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 17:26:04,478 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3078 messages.
+2025-07-31 17:26:04,478 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 17:26:11,690 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3572 messages.
+2025-07-31 17:26:11,691 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 17:26:14,021 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 17:26:14,021 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 17:26:17,727 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3162 messages.
+2025-07-31 17:26:17,728 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 17:27:29,870 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3091 messages.
+2025-07-31 17:27:29,870 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 17:27:29,871 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 17:27:38,301 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3161 messages.
+2025-07-31 17:27:38,301 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 4.0
+2025-07-31 17:28:09,607 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 17:28:09,607 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 17:28:09,608 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 17:29:22,661 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 17:29:22,661 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 17:30:25,371 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 17:32:32,283 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 17:35:31,269 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3237 messages.
+2025-07-31 17:35:31,269 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 17:36:30,238 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3087 messages.
+2025-07-31 17:36:30,238 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 17:36:30,238 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3105 messages.
+2025-07-31 17:36:30,238 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 17:36:36,218 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 17:36:36,219 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 17:38:44,603 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 17:39:36,628 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 17:40:05,920 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3541 messages.
+2025-07-31 17:40:05,920 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 17:40:25,740 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3301 messages.
+2025-07-31 17:40:25,740 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 17:41:00,106 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3486 messages.
+2025-07-31 17:41:00,106 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 3.0
+2025-07-31 17:42:14,530 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 4.0
+2025-07-31 17:42:14,531 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 5.0
+2025-07-31 17:43:38,680 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3324 messages.
+2025-07-31 17:43:38,681 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 4.0
+2025-07-31 17:46:37,757 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 17:46:37,758 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 17:46:37,758 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 17:46:46,055 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3049 messages.
+2025-07-31 17:46:46,055 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 17:48:14,182 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3471 messages.
+2025-07-31 17:48:14,182 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 5.0
+2025-07-31 17:52:31,281 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 17:52:45,741 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3148 messages.
+2025-07-31 17:52:45,741 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 17:52:57,101 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 17:52:57,432 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3210 messages.
+2025-07-31 17:52:57,433 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 17:53:09,786 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 17:53:09,787 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 17:53:09,787 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 17:53:11,367 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 17:56:50,574 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3075 messages.
+2025-07-31 17:56:50,575 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 17:57:23,898 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3210 messages.
+2025-07-31 17:57:23,898 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 17:58:37,491 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3591 messages.
+2025-07-31 17:58:37,492 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 17:59:34,657 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 17:59:34,660 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 18:03:09,276 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3040 messages.
+2025-07-31 18:03:09,276 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 18:03:43,625 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3391 messages.
+2025-07-31 18:03:43,625 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 18:03:56,820 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 18:03:56,820 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 18:03:57,811 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3219 messages.
+2025-07-31 18:03:57,811 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 18:03:57,812 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3249 messages.
+2025-07-31 18:03:57,812 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 18:03:57,896 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3241 messages.
+2025-07-31 18:03:57,896 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 5.0
+2025-07-31 18:04:14,967 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 18:04:14,968 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 18:04:14,969 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 18:04:16,858 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3323 messages.
+2025-07-31 18:04:16,858 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 18:04:48,196 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 18:04:48,197 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 18:09:45,283 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3045 messages.
+2025-07-31 18:09:45,283 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 18:11:32,796 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3612 messages.
+2025-07-31 18:11:32,797 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 18:14:43,079 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3120 messages.
+2025-07-31 18:14:43,079 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 18:14:46,146 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3239 messages.
+2025-07-31 18:14:46,146 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 18:15:23,607 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 18:15:23,607 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 18:15:23,608 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 18:15:27,759 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3180 messages.
+2025-07-31 18:15:27,759 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 18:15:28,932 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 18:15:28,932 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 18:15:28,933 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 18:15:35,817 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3494 messages.
+2025-07-31 18:15:35,817 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 18:15:48,647 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 18:15:48,649 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 18:15:58,106 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3517 messages.
+2025-07-31 18:15:58,106 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 18:16:01,131 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3564 messages.
+2025-07-31 18:16:01,131 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 18:16:28,335 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3509 messages.
+2025-07-31 18:16:28,335 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 18:16:51,883 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 18:16:51,883 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 18:16:51,884 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 18:17:06,707 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 18:17:06,707 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 18:23:18,060 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 14.0
+2025-07-31 18:23:18,060 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 15.0
+2025-07-31 18:25:43,539 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3076 messages.
+2025-07-31 18:25:43,539 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 14.0
+2025-07-31 18:25:43,539 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3087 messages.
+2025-07-31 18:25:43,539 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 13.0
+2025-07-31 18:25:48,020 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 14.0
+2025-07-31 18:26:25,600 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3296 messages.
+2025-07-31 18:26:25,601 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 13.0
+2025-07-31 18:26:25,601 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3270 messages.
+2025-07-31 18:26:25,601 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 18:26:40,038 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3226 messages.
+2025-07-31 18:26:40,039 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 18:26:43,263 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3416 messages.
+2025-07-31 18:26:43,264 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 18:26:44,045 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3305 messages.
+2025-07-31 18:26:44,045 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 18:26:59,814 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3042 messages.
+2025-07-31 18:26:59,814 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 18:27:02,240 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3432 messages.
+2025-07-31 18:27:02,240 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 18:27:02,423 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 18:27:02,424 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 18:27:07,250 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3073 messages.
+2025-07-31 18:27:07,250 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 18:27:07,251 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3090 messages.
+2025-07-31 18:27:07,251 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 18:27:37,046 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3140 messages.
+2025-07-31 18:27:37,046 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 18:27:44,496 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 18:28:10,274 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3302 messages.
+2025-07-31 18:28:10,274 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 18:34:00,711 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3201 messages.
+2025-07-31 18:34:00,711 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 18:35:07,059 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3541 messages.
+2025-07-31 18:35:07,060 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 4.0
+2025-07-31 18:36:33,691 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 18:36:33,691 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 18:36:33,692 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 18:37:14,439 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3426 messages.
+2025-07-31 18:37:14,439 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 18:37:23,491 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3138 messages.
+2025-07-31 18:37:23,492 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 18:37:23,492 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3100 messages.
+2025-07-31 18:37:23,492 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 18:38:15,881 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 18:39:01,003 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3393 messages.
+2025-07-31 18:39:01,003 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 4.0
+2025-07-31 18:39:45,269 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 18:39:45,269 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 18:39:45,277 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 18:46:47,165 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3084 messages.
+2025-07-31 18:46:47,165 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 18:46:48,093 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 18:46:48,094 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 18:46:50,025 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3099 messages.
+2025-07-31 18:46:50,025 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 18:46:52,497 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 18:46:52,497 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 18:48:29,417 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3561 messages.
+2025-07-31 18:48:29,417 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 18:49:32,118 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3387 messages.
+2025-07-31 18:49:32,118 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 18:50:10,988 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 18:50:10,992 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 18:50:23,037 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3167 messages.
+2025-07-31 18:50:23,037 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 18:50:55,381 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3342 messages.
+2025-07-31 18:50:55,381 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 18:50:55,381 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3356 messages.
+2025-07-31 18:50:55,381 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 18:52:29,267 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 18:52:29,268 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 18:52:47,836 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 18:52:47,836 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 18:55:52,596 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 18:55:52,597 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 18:55:52,598 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 18:57:06,985 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3095 messages.
+2025-07-31 18:57:06,986 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 18:57:07,712 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3043 messages.
+2025-07-31 18:57:07,712 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 18:57:25,924 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 18:57:31,455 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 18:57:31,455 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 18:57:31,456 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 18:58:08,670 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3394 messages.
+2025-07-31 18:58:08,671 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 18:58:11,911 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 18:58:49,254 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 18:58:49,254 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 19:01:15,636 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3289 messages.
+2025-07-31 19:01:15,637 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 14.0
+2025-07-31 19:01:56,473 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3548 messages.
+2025-07-31 19:01:56,473 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 13.0
+2025-07-31 19:02:02,703 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 14.0
+2025-07-31 19:02:02,704 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 15.0
+2025-07-31 19:02:53,686 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3130 messages.
+2025-07-31 19:02:53,686 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 19:03:07,683 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3165 messages.
+2025-07-31 19:03:07,683 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 13.0
+2025-07-31 19:03:35,859 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 19:03:56,049 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3357 messages.
+2025-07-31 19:03:56,049 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 13.0
+2025-07-31 19:03:56,050 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3327 messages.
+2025-07-31 19:03:56,050 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 19:06:58,655 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3320 messages.
+2025-07-31 19:06:58,655 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 19:06:58,656 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3323 messages.
+2025-07-31 19:06:58,656 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 19:07:05,477 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3353 messages.
+2025-07-31 19:07:05,477 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 19:07:31,976 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 2994 messages.
+2025-07-31 19:07:31,977 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 19:07:45,803 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 19:07:45,804 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 19:07:45,804 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 19:07:54,197 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3119 messages.
+2025-07-31 19:07:54,197 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 19:07:54,198 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3093 messages.
+2025-07-31 19:07:54,198 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 19:09:36,690 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3231 messages.
+2025-07-31 19:09:36,690 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 19:10:01,336 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3571 messages.
+2025-07-31 19:10:01,337 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 19:10:17,472 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3415 messages.
+2025-07-31 19:10:17,472 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 19:12:53,104 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3253 messages.
+2025-07-31 19:12:53,104 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 19:12:55,603 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 19:14:35,525 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 19:15:23,447 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3528 messages.
+2025-07-31 19:15:23,447 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 4.0
+2025-07-31 19:15:29,958 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 5.0
+2025-07-31 19:15:29,960 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 19:15:29,961 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 19:15:38,126 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 19:15:38,126 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 19:16:09,689 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 19:16:09,690 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 19:18:16,267 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3144 messages.
+2025-07-31 19:18:16,267 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 19:18:47,285 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3327 messages.
+2025-07-31 19:18:47,286 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 19:18:47,286 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3299 messages.
+2025-07-31 19:18:47,286 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 19:19:43,999 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 19:21:29,573 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 19:21:29,574 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 19:24:40,945 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 19:24:40,946 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 19:25:58,642 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3418 messages.
+2025-07-31 19:25:58,642 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 19:26:00,623 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 19:26:00,624 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 14.0
+2025-07-31 19:26:31,778 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3322 messages.
+2025-07-31 19:26:31,778 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 19:26:31,779 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3312 messages.
+2025-07-31 19:26:31,779 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 19:26:39,588 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3324 messages.
+2025-07-31 19:26:39,588 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 19:26:39,588 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3287 messages.
+2025-07-31 19:26:39,588 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 19:26:44,234 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3156 messages.
+2025-07-31 19:26:44,235 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 19:26:52,522 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3368 messages.
+2025-07-31 19:26:52,522 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 19:26:55,158 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 19:26:55,159 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 19:26:55,160 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 19:26:55,160 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 19:27:38,969 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3462 messages.
+2025-07-31 19:27:38,969 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 19:28:07,994 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 19:28:07,994 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 19:30:06,743 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 19:32:20,164 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3252 messages.
+2025-07-31 19:32:20,164 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 19:32:40,388 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3319 messages.
+2025-07-31 19:32:40,388 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 19:33:17,395 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 19:33:17,399 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 19:33:17,400 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 19:33:19,569 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 19:33:19,569 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 19:34:31,239 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 19:34:31,240 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 17.0
+2025-07-31 19:34:31,241 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 18.0
+2025-07-31 19:35:08,153 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3130 messages.
+2025-07-31 19:35:08,153 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 17.0
+2025-07-31 19:35:22,795 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3219 messages.
+2025-07-31 19:35:22,795 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 16.0
+2025-07-31 19:36:19,930 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3078 messages.
+2025-07-31 19:36:19,930 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 15.0
+2025-07-31 19:37:18,655 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3123 messages.
+2025-07-31 19:37:18,655 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 14.0
+2025-07-31 19:37:41,588 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3218 messages.
+2025-07-31 19:37:41,589 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 19:37:49,657 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3551 messages.
+2025-07-31 19:37:49,657 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 19:37:58,993 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 19:37:58,995 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 15.0
+2025-07-31 19:37:58,995 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 15.0
+2025-07-31 19:37:58,995 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 19:38:10,747 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3409 messages.
+2025-07-31 19:38:10,747 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 15.0
+2025-07-31 19:38:28,236 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3084 messages.
+2025-07-31 19:38:28,236 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 19:38:32,299 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3507 messages.
+2025-07-31 19:38:32,299 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 19:39:16,923 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3331 messages.
+2025-07-31 19:39:16,923 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 19:39:37,723 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 19:39:37,724 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 19:39:37,725 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 19:43:32,758 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3073 messages.
+2025-07-31 19:43:32,759 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 14.0
+2025-07-31 19:43:33,518 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3063 messages.
+2025-07-31 19:43:33,518 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 19:44:14,636 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3284 messages.
+2025-07-31 19:44:14,636 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 19:44:43,789 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3458 messages.
+2025-07-31 19:44:43,789 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 19:44:43,790 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3402 messages.
+2025-07-31 19:44:43,790 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 19:44:43,790 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 2023 messages.
+2025-07-31 19:44:43,790 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 19:45:53,928 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3404 messages.
+2025-07-31 19:45:53,928 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 19:45:53,928 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3427 messages.
+2025-07-31 19:45:53,928 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 19:46:02,669 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 19:48:32,062 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3157 messages.
+2025-07-31 19:48:32,062 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 19:48:58,944 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3315 messages.
+2025-07-31 19:48:58,944 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 4.0
+2025-07-31 19:48:59,866 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3300 messages.
+2025-07-31 19:48:59,866 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 3.0
+2025-07-31 19:49:55,317 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 19:49:55,318 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 19:49:55,318 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 19:50:12,434 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 19:50:12,436 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 19:50:12,437 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 19:50:51,743 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3372 messages.
+2025-07-31 19:50:51,743 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 19:51:13,479 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3461 messages.
+2025-07-31 19:51:13,480 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 19:51:24,933 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3542 messages.
+2025-07-31 19:51:24,934 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 19:55:33,360 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 19:55:33,361 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 19:55:33,361 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 19:59:36,070 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 19:59:36,070 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 20:01:04,595 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3330 messages.
+2025-07-31 20:01:04,595 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 20:01:04,596 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3323 messages.
+2025-07-31 20:01:04,596 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 20:01:04,685 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3273 messages.
+2025-07-31 20:01:04,686 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 20:01:43,067 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 20:01:43,952 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 20:01:43,953 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 20:01:55,305 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3587 messages.
+2025-07-31 20:01:55,306 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 20:02:01,787 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3548 messages.
+2025-07-31 20:02:01,787 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 20:02:01,787 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3520 messages.
+2025-07-31 20:02:01,787 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 20:05:51,215 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3082 messages.
+2025-07-31 20:05:51,215 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 20:05:52,588 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3054 messages.
+2025-07-31 20:05:52,589 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 20:05:59,849 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3163 messages.
+2025-07-31 20:05:59,849 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 5.0
+2025-07-31 20:08:24,517 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 20:08:24,518 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 20:10:06,907 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3156 messages.
+2025-07-31 20:10:06,908 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 20:10:24,110 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 20:11:46,292 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 2998 messages.
+2025-07-31 20:11:46,292 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 4.0
+2025-07-31 20:12:02,278 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3088 messages.
+2025-07-31 20:12:02,278 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 3.0
+2025-07-31 20:12:41,816 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3265 messages.
+2025-07-31 20:12:41,816 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 2.0
+2025-07-31 20:13:14,589 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 20:13:14,590 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 20:13:14,590 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 20:13:14,592 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 20:15:17,132 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 20:15:17,133 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 20:15:17,134 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 20:19:31,422 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3311 messages.
+2025-07-31 20:19:31,423 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 20:20:00,216 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3464 messages.
+2025-07-31 20:20:00,216 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 20:21:19,258 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 20:21:19,259 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 20:21:19,259 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 20:23:58,544 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3229 messages.
+2025-07-31 20:23:58,544 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 20:23:59,333 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3209 messages.
+2025-07-31 20:23:59,333 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 20:24:23,403 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3323 messages.
+2025-07-31 20:24:23,403 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 20:24:31,604 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3393 messages.
+2025-07-31 20:24:31,604 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 20:24:51,623 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 20:24:51,624 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 20:25:02,299 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 20:25:47,088 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3147 messages.
+2025-07-31 20:25:47,088 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 20:25:48,125 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3155 messages.
+2025-07-31 20:25:48,125 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 20:25:58,239 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3200 messages.
+2025-07-31 20:25:58,240 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 20:26:51,488 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 20:26:51,490 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 20:27:03,788 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 20:27:03,791 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 20:27:03,791 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 20:31:20,022 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 2986 messages.
+2025-07-31 20:31:20,022 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 20:31:20,307 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 20:31:20,308 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 20:31:20,309 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 20:31:34,864 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3045 messages.
+2025-07-31 20:31:34,864 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 20:31:48,456 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3144 messages.
+2025-07-31 20:31:48,456 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 20:32:50,869 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 20:32:50,869 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 20:34:19,740 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 20:34:19,740 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 20:34:53,682 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3006 messages.
+2025-07-31 20:34:53,682 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 20:35:35,221 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3169 messages.
+2025-07-31 20:35:35,222 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 13.0
+2025-07-31 20:36:49,117 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3589 messages.
+2025-07-31 20:36:49,118 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 20:36:54,081 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 20:36:54,081 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 14.0
+2025-07-31 20:36:54,084 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 20:36:54,084 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 20:37:19,640 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3060 messages.
+2025-07-31 20:37:19,640 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 15.0
+2025-07-31 20:37:25,295 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3087 messages.
+2025-07-31 20:37:25,296 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 20:37:25,740 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 16.0
+2025-07-31 20:37:25,740 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 16.0
+2025-07-31 20:37:25,741 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 17.0
+2025-07-31 20:37:41,798 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3216 messages.
+2025-07-31 20:37:41,799 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 16.0
+2025-07-31 20:38:01,225 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3291 messages.
+2025-07-31 20:38:01,225 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 15.0
+2025-07-31 20:38:23,411 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream closed normally by client. Processed 3464 messages.
+2025-07-31 20:38:23,411 - root - INFO - [Client: grpc-client-vm-2, Channel: 0] Stream finished. Active streams: 14.0
+2025-07-31 20:42:09,771 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3237 messages.
+2025-07-31 20:42:09,771 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 20:42:49,614 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3459 messages.
+2025-07-31 20:42:49,614 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 20:43:00,221 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 20:43:00,222 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 20:43:00,223 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 20:43:14,184 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3561 messages.
+2025-07-31 20:43:14,184 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 14.0
+2025-07-31 20:44:18,984 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 15.0
+2025-07-31 20:44:18,985 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 16.0
+2025-07-31 20:44:23,743 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3441 messages.
+2025-07-31 20:44:23,743 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 15.0
+2025-07-31 20:44:23,743 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3467 messages.
+2025-07-31 20:44:23,743 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 14.0
+2025-07-31 20:44:25,901 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 15.0
+2025-07-31 20:44:46,146 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 20:44:46,149 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 17.0
+2025-07-31 20:45:52,924 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3477 messages.
+2025-07-31 20:45:52,924 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 16.0
+2025-07-31 20:45:52,925 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3468 messages.
+2025-07-31 20:45:52,925 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 15.0
+2025-07-31 20:47:02,848 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3015 messages.
+2025-07-31 20:47:02,848 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 20:47:48,341 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3092 messages.
+2025-07-31 20:47:48,341 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 13.0
+2025-07-31 20:47:48,342 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3129 messages.
+2025-07-31 20:47:48,342 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 20:48:07,612 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3374 messages.
+2025-07-31 20:48:07,613 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 20:48:18,676 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3431 messages.
+2025-07-31 20:48:18,676 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 20:48:39,011 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3520 messages.
+2025-07-31 20:48:39,011 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 20:48:39,335 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 20:48:39,338 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 20:49:12,503 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3495 messages.
+2025-07-31 20:49:12,504 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 20:49:15,580 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 20:49:27,973 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 20:49:29,786 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 20:49:29,787 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 14.0
+2025-07-31 20:53:21,657 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3087 messages.
+2025-07-31 20:53:21,657 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 20:54:49,869 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3552 messages.
+2025-07-31 20:54:49,869 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 20:54:49,870 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3540 messages.
+2025-07-31 20:54:49,870 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 20:55:15,094 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3277 messages.
+2025-07-31 20:55:15,095 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 20:55:15,570 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3305 messages.
+2025-07-31 20:55:15,570 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 20:55:17,516 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 20:55:17,517 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 20:55:17,518 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 20:55:56,278 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 20:55:56,279 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 20:55:56,280 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 20:56:15,136 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 14.0
+2025-07-31 20:56:35,299 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3519 messages.
+2025-07-31 20:56:35,299 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 13.0
+2025-07-31 20:56:41,215 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3536 messages.
+2025-07-31 20:56:41,216 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 20:56:45,815 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 20:59:14,654 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 1171 messages.
+2025-07-31 20:59:14,654 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 12.0
+2025-07-31 20:59:14,655 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3182 messages.
+2025-07-31 20:59:14,655 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 20:59:30,860 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 20:59:39,508 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3073 messages.
+2025-07-31 20:59:39,508 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 20:59:41,381 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3155 messages.
+2025-07-31 20:59:41,381 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 21:00:38,886 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 21:00:38,887 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 21:00:40,409 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 21:00:40,410 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 21:00:40,410 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 21:01:10,105 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3503 messages.
+2025-07-31 21:01:10,105 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 21:01:18,278 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3551 messages.
+2025-07-31 21:01:18,278 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 21:01:29,016 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 21:01:29,016 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 13.0
+2025-07-31 21:01:29,018 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 15.0
+2025-07-31 21:01:29,018 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 15.0
+2025-07-31 21:02:47,256 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 21:02:47,259 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 17.0
+2025-07-31 21:06:25,587 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3335 messages.
+2025-07-31 21:06:25,587 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 16.0
+2025-07-31 21:06:35,724 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3172 messages.
+2025-07-31 21:06:35,724 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 15.0
+2025-07-31 21:06:35,724 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3202 messages.
+2025-07-31 21:06:35,724 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 14.0
+2025-07-31 21:06:59,824 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3503 messages.
+2025-07-31 21:06:59,824 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 21:07:25,849 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3210 messages.
+2025-07-31 21:07:25,849 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 21:07:49,494 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3544 messages.
+2025-07-31 21:07:49,494 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 21:08:08,171 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 21:08:18,985 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 21:08:18,987 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 15.0
+2025-07-31 21:08:18,987 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 15.0
+2025-07-31 21:10:31,581 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 16.0
+2025-07-31 21:10:31,582 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 18.0
+2025-07-31 21:10:31,582 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 18.0
+2025-07-31 21:10:31,583 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 19.0
+2025-07-31 21:11:02,842 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3110 messages.
+2025-07-31 21:11:02,842 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 18.0
+2025-07-31 21:11:18,688 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3168 messages.
+2025-07-31 21:11:18,688 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 17.0
+2025-07-31 21:11:18,689 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3215 messages.
+2025-07-31 21:11:18,689 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 16.0
+2025-07-31 21:11:18,887 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3210 messages.
+2025-07-31 21:11:18,887 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 15.0
+2025-07-31 21:11:28,259 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3261 messages.
+2025-07-31 21:11:28,260 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 14.0
+2025-07-31 21:12:03,650 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3163 messages.
+2025-07-31 21:12:03,651 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 13.0
+2025-07-31 21:12:26,682 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3291 messages.
+2025-07-31 21:12:26,682 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 21:12:48,040 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3373 messages.
+2025-07-31 21:12:48,041 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 21:13:15,246 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 21:13:19,784 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3552 messages.
+2025-07-31 21:13:19,784 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 21:13:29,162 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 21:13:29,164 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 21:13:29,164 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 21:13:37,767 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3232 messages.
+2025-07-31 21:13:37,767 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 13.0
+2025-07-31 21:14:19,236 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3464 messages.
+2025-07-31 21:14:19,236 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 21:18:31,953 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3125 messages.
+2025-07-31 21:18:31,954 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 21:18:50,342 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3155 messages.
+2025-07-31 21:18:50,342 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 21:18:51,760 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3166 messages.
+2025-07-31 21:18:51,760 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 21:19:01,096 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3221 messages.
+2025-07-31 21:19:01,096 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 21:19:26,164 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 21:19:26,164 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 21:21:16,129 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 21:21:16,130 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 21:21:27,304 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3291 messages.
+2025-07-31 21:21:27,305 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 21:21:28,979 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3291 messages.
+2025-07-31 21:21:28,979 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 21:22:10,646 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3495 messages.
+2025-07-31 21:22:10,646 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 21:22:10,646 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3504 messages.
+2025-07-31 21:22:10,647 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 21:23:33,917 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 21:23:35,359 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 21:23:35,359 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 21:23:38,477 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3056 messages.
+2025-07-31 21:23:38,478 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 21:24:02,226 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3158 messages.
+2025-07-31 21:24:02,227 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 21:24:17,265 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3317 messages.
+2025-07-31 21:24:17,265 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 21:24:26,932 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3279 messages.
+2025-07-31 21:24:26,933 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 21:26:20,033 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 21:26:20,034 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 21:26:20,034 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 21:30:02,847 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 21:30:02,847 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 21:30:39,790 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3350 messages.
+2025-07-31 21:30:39,790 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 21:30:39,790 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3386 messages.
+2025-07-31 21:30:39,791 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 21:30:43,212 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 21:30:43,213 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 21:31:17,735 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 2981 messages.
+2025-07-31 21:31:17,736 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 21:32:23,456 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 21:33:12,814 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3590 messages.
+2025-07-31 21:33:12,814 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 21:33:35,886 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3008 messages.
+2025-07-31 21:33:35,886 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 21:33:38,447 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3004 messages.
+2025-07-31 21:33:38,447 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 21:34:00,065 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 21:34:00,065 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 21:34:29,033 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3249 messages.
+2025-07-31 21:34:29,033 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 21:35:55,638 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 21:36:53,500 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3154 messages.
+2025-07-31 21:36:53,500 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 21:37:32,017 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3349 messages.
+2025-07-31 21:37:32,018 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 21:37:55,259 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3476 messages.
+2025-07-31 21:37:55,259 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 21:38:38,912 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 21:38:38,913 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 21:40:36,457 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3146 messages.
+2025-07-31 21:40:36,458 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 21:40:36,458 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3160 messages.
+2025-07-31 21:40:36,458 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 21:41:17,714 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3178 messages.
+2025-07-31 21:41:17,714 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 21:41:34,713 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3271 messages.
+2025-07-31 21:41:34,713 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 21:42:26,372 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 2986 messages.
+2025-07-31 21:42:26,372 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 21:43:58,713 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 21:43:58,714 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 21:44:57,823 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3273 messages.
+2025-07-31 21:44:57,823 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 21:45:56,680 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3571 messages.
+2025-07-31 21:45:56,681 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 21:46:00,885 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 21:46:00,886 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 21:46:00,887 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 21:47:24,757 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3426 messages.
+2025-07-31 21:47:24,757 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 21:47:58,144 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 21:49:06,517 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3114 messages.
+2025-07-31 21:49:06,517 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 21:49:56,476 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3357 messages.
+2025-07-31 21:49:56,476 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 21:50:04,367 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 21:50:04,369 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 21:55:50,794 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3572 messages.
+2025-07-31 21:55:50,794 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 21:55:50,794 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3560 messages.
+2025-07-31 21:55:50,794 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 21:56:39,466 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3197 messages.
+2025-07-31 21:56:39,466 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 21:57:14,893 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3346 messages.
+2025-07-31 21:57:14,893 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 4.0
+2025-07-31 21:57:25,203 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3417 messages.
+2025-07-31 21:57:25,204 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 3.0
+2025-07-31 21:59:31,691 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3447 messages.
+2025-07-31 21:59:31,692 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 2.0
+2025-07-31 21:59:34,974 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 21:59:34,975 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 22:00:07,396 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3000 messages.
+2025-07-31 22:00:07,396 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 3.0
+2025-07-31 22:00:15,316 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3064 messages.
+2025-07-31 22:00:15,316 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 2.0
+2025-07-31 22:04:48,296 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 3.0
+2025-07-31 22:04:48,297 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 4.0
+2025-07-31 22:04:48,298 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 5.0
+2025-07-31 22:06:12,276 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 6.0
+2025-07-31 22:10:03,401 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3140 messages.
+2025-07-31 22:10:03,401 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 22:11:34,648 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3595 messages.
+2025-07-31 22:11:34,649 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 22:12:03,827 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 5.0
+2025-07-31 22:12:03,828 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 22:13:03,769 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 7.0
+2025-07-31 22:15:18,411 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3156 messages.
+2025-07-31 22:15:18,411 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 22:16:16,449 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3417 messages.
+2025-07-31 22:16:16,450 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 5.0
+2025-07-31 22:16:16,450 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3430 messages.
+2025-07-31 22:16:16,450 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 4.0
+2025-07-31 22:16:25,174 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3052 messages.
+2025-07-31 22:16:25,174 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 3.0
+2025-07-31 22:18:03,109 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream opened. Active streams: 4.0
+2025-07-31 22:21:17,944 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 5.0
+2025-07-31 22:21:17,946 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 22:21:17,947 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 22:21:17,947 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 22:22:26,684 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3111 messages.
+2025-07-31 22:22:26,684 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 22:23:36,489 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3484 messages.
+2025-07-31 22:23:36,490 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 22:23:59,853 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 22:24:12,259 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3361 messages.
+2025-07-31 22:24:12,259 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 22:24:42,425 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 22:24:42,425 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 22:24:42,425 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 22:28:40,481 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream closed normally by client. Processed 3175 messages.
+2025-07-31 22:28:40,481 - root - INFO - [Client: grpc-client-vm-4, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 22:30:27,424 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 22:30:27,426 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 22:31:37,575 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 22:31:37,576 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 22:31:37,776 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3090 messages.
+2025-07-31 22:31:37,776 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 22:32:21,992 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3353 messages.
+2025-07-31 22:32:21,993 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 22:32:53,716 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3477 messages.
+2025-07-31 22:32:53,716 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 22:33:16,159 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3578 messages.
+2025-07-31 22:33:16,160 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 22:33:44,064 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 22:34:19,029 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3079 messages.
+2025-07-31 22:34:19,029 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 22:34:55,474 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 22:34:55,476 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 22:34:55,476 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 22:35:09,915 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3128 messages.
+2025-07-31 22:35:09,915 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 22:35:09,915 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3117 messages.
+2025-07-31 22:35:09,915 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 22:36:39,070 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3540 messages.
+2025-07-31 22:36:39,070 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 8.0
+2025-07-31 22:36:40,761 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 22:36:40,761 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 22:36:40,762 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 22:41:23,037 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3267 messages.
+2025-07-31 22:41:23,037 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 22:41:25,114 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 11.0
+2025-07-31 22:41:25,115 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 22:41:39,990 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 22:42:14,318 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream closed normally by client. Processed 3534 messages.
+2025-07-31 22:42:14,319 - root - INFO - [Client: grpc-client-vm-6, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 22:43:23,754 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 22:43:23,755 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 22:43:23,756 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 22:43:35,373 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream closed normally by client. Processed 3593 messages.
+2025-07-31 22:43:35,373 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 22:44:20,371 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream closed normally by client. Processed 3180 messages.
+2025-07-31 22:44:20,371 - root - INFO - [Client: grpc-client-vm-1, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 22:45:35,517 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3197 messages.
+2025-07-31 22:45:35,517 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 22:46:26,087 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3462 messages.
+2025-07-31 22:46:26,087 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 22:46:26,087 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3447 messages.
+2025-07-31 22:46:26,087 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 22:46:55,137 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3073 messages.
+2025-07-31 22:46:55,138 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 7.0
+2025-07-31 22:48:06,309 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3433 messages.
+2025-07-31 22:48:06,309 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 22:48:23,571 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 22:48:23,572 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 22:48:33,788 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 22:48:33,790 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 22:48:33,792 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 22:48:34,309 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3554 messages.
+2025-07-31 22:48:34,310 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 22:48:38,118 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 22:51:24,360 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 12.0
+2025-07-31 22:51:24,362 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 13.0
+2025-07-31 22:51:24,362 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 14.0
+2025-07-31 22:51:24,363 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream opened. Active streams: 15.0
+2025-07-31 22:53:07,524 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3535 messages.
+2025-07-31 22:53:07,524 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 14.0
+2025-07-31 22:53:12,242 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3537 messages.
+2025-07-31 22:53:12,242 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 13.0
+2025-07-31 22:53:37,235 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3077 messages.
+2025-07-31 22:53:37,235 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 22:54:44,962 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3384 messages.
+2025-07-31 22:54:44,962 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 22:54:59,416 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3453 messages.
+2025-07-31 22:54:59,416 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 22:58:43,789 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3073 messages.
+2025-07-31 22:58:43,789 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 22:59:19,120 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 22:59:19,124 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 22:59:32,727 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 22:59:36,785 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3367 messages.
+2025-07-31 22:59:36,785 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 22:59:36,785 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3350 messages.
+2025-07-31 22:59:36,785 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 22:59:57,402 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3415 messages.
+2025-07-31 22:59:57,402 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 22:59:57,403 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 23:00:01,193 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 23:01:50,916 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3141 messages.
+2025-07-31 23:01:50,916 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 6.0
+2025-07-31 23:02:08,440 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3209 messages.
+2025-07-31 23:02:08,440 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 5.0
+2025-07-31 23:02:16,479 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3225 messages.
+2025-07-31 23:02:16,479 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 4.0
+2025-07-31 23:02:58,692 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream closed normally by client. Processed 3461 messages.
+2025-07-31 23:02:58,693 - root - INFO - [Client: grpc-client-vm-3, Channel: 0] Stream finished. Active streams: 3.0
+2025-07-31 23:06:24,248 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 1893 messages.
+2025-07-31 23:06:24,248 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 2.0
+2025-07-31 23:06:26,832 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 3.0
+2025-07-31 23:06:26,833 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 4.0
+2025-07-31 23:06:26,834 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 5.0
+2025-07-31 23:06:26,834 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 6.0
+2025-07-31 23:07:07,220 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 23:10:44,516 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3426 messages.
+2025-07-31 23:10:44,517 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 23:11:12,889 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3546 messages.
+2025-07-31 23:11:12,889 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 23:11:15,525 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 23:11:15,528 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 23:11:31,340 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 23:11:31,342 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 23:12:20,955 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 23:12:20,956 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 23:16:16,728 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 23:16:16,729 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 23:16:16,730 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream opened. Active streams: 14.0
+2025-07-31 23:17:04,395 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 2928 messages.
+2025-07-31 23:17:04,396 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 13.0
+2025-07-31 23:17:09,747 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 2908 messages.
+2025-07-31 23:17:09,747 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 12.0
+2025-07-31 23:18:09,946 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 2959 messages.
+2025-07-31 23:18:09,946 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 11.0
+2025-07-31 23:18:09,947 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 2941 messages.
+2025-07-31 23:18:09,947 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 10.0
+2025-07-31 23:18:34,488 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 23:18:49,493 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 23:18:49,494 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 23:18:49,494 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 23:21:36,332 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3108 messages.
+2025-07-31 23:21:36,332 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 23:21:36,332 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3083 messages.
+2025-07-31 23:21:36,332 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 23:22:48,802 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3129 messages.
+2025-07-31 23:22:48,802 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 23:22:59,626 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream closed normally by client. Processed 3448 messages.
+2025-07-31 23:22:59,627 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 23:23:10,464 - root - INFO - [Client: grpc-client-vm-6, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 23:23:57,507 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3458 messages.
+2025-07-31 23:23:57,507 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 23:24:18,128 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 7.0
+2025-07-31 23:24:18,129 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 8.0
+2025-07-31 23:24:18,129 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 9.0
+2025-07-31 23:24:18,130 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 10.0
+2025-07-31 23:26:59,377 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3195 messages.
+2025-07-31 23:26:59,377 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 23:28:10,331 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3551 messages.
+2025-07-31 23:28:10,331 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 23:28:10,331 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream closed normally by client. Processed 3553 messages.
+2025-07-31 23:28:10,331 - root - INFO - [Client: grpc-client-vm-2, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 23:29:09,021 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3101 messages.
+2025-07-31 23:29:09,021 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 23:29:45,354 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3289 messages.
+2025-07-31 23:29:45,354 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 5.0
+2025-07-31 23:29:45,354 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream closed normally by client. Processed 3269 messages.
+2025-07-31 23:29:45,354 - root - INFO - [Client: grpc-client-vm-5, Channel: 2] Stream finished. Active streams: 4.0
+2025-07-31 23:31:45,864 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 5.0
+2025-07-31 23:31:45,866 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream opened. Active streams: 6.0
+2025-07-31 23:33:10,585 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 23:33:10,588 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 23:35:15,726 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 23:35:15,730 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 23:35:15,794 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3304 messages.
+2025-07-31 23:35:15,795 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 23:35:28,589 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3335 messages.
+2025-07-31 23:35:28,589 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 23:35:37,425 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3393 messages.
+2025-07-31 23:35:37,425 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 7.0
+2025-07-31 23:36:09,950 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3541 messages.
+2025-07-31 23:36:09,950 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 6.0
+2025-07-31 23:37:10,797 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 23:40:27,712 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 8.0
+2025-07-31 23:40:27,713 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 23:40:27,716 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 23:41:49,397 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 11.0
+2025-07-31 23:41:49,399 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 12.0
+2025-07-31 23:41:49,400 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream opened. Active streams: 13.0
+2025-07-31 23:43:11,931 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream closed normally by client. Processed 3402 messages.
+2025-07-31 23:43:11,931 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 12.0
+2025-07-31 23:43:11,931 - root - INFO - [Client: grpc-client-vm-6, Channel: 1] Stream finished. Active streams: 11.0
+2025-07-31 23:44:41,018 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3451 messages.
+2025-07-31 23:44:41,018 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 10.0
+2025-07-31 23:45:07,892 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream closed normally by client. Processed 3556 messages.
+2025-07-31 23:45:07,893 - root - INFO - [Client: grpc-client-vm-1, Channel: 1] Stream finished. Active streams: 9.0
+2025-07-31 23:45:42,282 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3141 messages.
+2025-07-31 23:45:42,282 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 8.0
+2025-07-31 23:47:03,669 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream closed normally by client. Processed 3522 messages.
+2025-07-31 23:47:03,669 - root - INFO - [Client: grpc-client-vm-2, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 23:47:16,530 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3033 messages.
+2025-07-31 23:47:16,530 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 23:47:48,070 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 7.0
+2025-07-31 23:47:48,071 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 8.0
+2025-07-31 23:47:48,071 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 9.0
+2025-07-31 23:48:50,238 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 10.0
+2025-07-31 23:48:50,239 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 11.0
+2025-07-31 23:48:50,241 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream opened. Active streams: 12.0
+2025-07-31 23:51:22,586 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3280 messages.
+2025-07-31 23:51:22,587 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 11.0
+2025-07-31 23:51:53,150 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3423 messages.
+2025-07-31 23:51:53,150 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 10.0
+2025-07-31 23:51:53,150 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3403 messages.
+2025-07-31 23:51:53,151 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 9.0
+2025-07-31 23:51:54,744 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3054 messages.
+2025-07-31 23:51:54,744 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 23:52:14,404 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 9.0
+2025-07-31 23:52:14,405 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 10.0
+2025-07-31 23:53:22,205 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3459 messages.
+2025-07-31 23:53:22,205 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 9.0
+2025-07-31 23:53:22,205 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream closed normally by client. Processed 3455 messages.
+2025-07-31 23:53:22,205 - root - INFO - [Client: grpc-client-vm-4, Channel: 2] Stream finished. Active streams: 8.0
+2025-07-31 23:58:59,863 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3325 messages.
+2025-07-31 23:58:59,864 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 7.0
+2025-07-31 23:59:04,245 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3054 messages.
+2025-07-31 23:59:04,245 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 6.0
+2025-07-31 23:59:04,245 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3091 messages.
+2025-07-31 23:59:04,245 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 5.0
+2025-07-31 23:59:35,780 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3573 messages.
+2025-07-31 23:59:35,780 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 4.0
+2025-07-31 23:59:35,781 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3527 messages.
+2025-07-31 23:59:35,781 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 3.0
+2025-07-31 23:59:44,131 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream closed normally by client. Processed 3261 messages.
+2025-07-31 23:59:44,131 - root - INFO - [Client: grpc-client-vm-4, Channel: 1] Stream finished. Active streams: 2.0
+2025-07-31 23:59:57,871 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 3.0
+2025-08-01 00:03:08,096 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3276 messages.
+2025-08-01 00:03:08,096 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 2.0
+2025-08-01 00:03:30,729 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3390 messages.
+2025-08-01 00:03:30,729 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 1.0
+2025-08-01 00:04:14,378 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 2.0
+2025-08-01 00:04:14,379 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream opened. Active streams: 3.0
+2025-08-01 00:11:11,199 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 4.0
+2025-08-01 00:11:11,199 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 5.0
+2025-08-01 00:11:24,481 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 6.0
+2025-08-01 00:11:24,481 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream opened. Active streams: 7.0
+2025-08-01 00:11:51,253 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream closed normally by client. Processed 3545 messages.
+2025-08-01 00:11:51,253 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream finished. Active streams: 6.0
+2025-08-01 00:14:17,913 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 2994 messages.
+2025-08-01 00:14:17,913 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 5.0
+2025-08-01 00:15:07,686 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream closed normally by client. Processed 3275 messages.
+2025-08-01 00:15:07,687 - root - INFO - [Client: grpc-client-vm-5, Channel: 0] Stream finished. Active streams: 4.0
+2025-08-01 00:16:16,162 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 5.0
+2025-08-01 00:16:16,164 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 7.0
+2025-08-01 00:16:16,164 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 7.0
+2025-08-01 00:16:16,165 - root - INFO - [Client: grpc-client-vm-5, Channel: 1] Stream opened. Active streams: 8.0
+2025-08-01 00:21:29,607 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3102 messages.
+2025-08-01 00:21:29,607 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 7.0
+2025-08-01 00:21:46,606 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream closed normally by client. Processed 3189 messages.
+2025-08-01 00:21:46,607 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream finished. Active streams: 6.0
+2025-08-01 00:21:52,227 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3142 messages.
+2025-08-01 00:21:52,227 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 5.0
+2025-08-01 00:23:08,359 - root - INFO - [Client: grpc-client-vm-1, Channel: 0] Stream opened. Active streams: 6.0
+2025-08-01 00:23:11,413 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream closed normally by client. Processed 3537 messages.
+2025-08-01 00:23:11,414 - root - INFO - [Client: grpc-client-vm-3, Channel: 1] Stream finished. Active streams: 5.0
+2025-08-01 00:23:49,120 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 6.0
+2025-08-01 00:23:49,121 - root - INFO - [Client: grpc-client-vm-3, Channel: 2] Stream opened. Active streams: 7.0

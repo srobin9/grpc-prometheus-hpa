@@ -60,6 +60,7 @@ spec:
       - name: grpc-cert # 로컬에서 생성한 TLS Secret
         kind: Secret # 참조하는 리소스의 종류
         group: ""
+
 ---
 # 6. HTTPRoute: Gateway로 들어온 트래픽을 서비스로 라우팅합니다.
 # gRPC는 HTTP/2 기반이므로 HTTPRoute로 처리가능합니다.
