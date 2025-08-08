@@ -186,7 +186,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
 
     ![GCLB 프로비저닝 결과](./image/GCLB_provisioning.png)
 
-3-1.  **클라이언트 실행:**
+3.  **클라이언트 실행(Option #1):**
 
     ```bash
     # 1. 서버 인증서 파일을 클라이언트 디렉토리로 복사
@@ -207,12 +207,13 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     # 4. 클라이언트 실행 (스트림 수를 늘려 부하를 발생시킵니다)
     python client.py [GATEWAY_EXTERNAL_IP]:443 --streams 15 --cert_file ./tls.crt
     ```
+
     ![Client 실행 결과](./image/Client_running.png)
 
-3-2.  **다중 채널 및 Multiplex 테스트용 클라이언트 실행:**
+3.  **다중 채널 및 Multiplex 테스트용 클라이언트 실행(Option 2):**
 
     다수의 Grpc 클라이언트에서 각각 3개의 grpc channel을 생성한 후 각 채널별로 10개의 스트림을 생성하여 서버측의 부하 분산을 테스트합니다. 
-    
+
     (1) ~/grpc-prometheus-hpa/client 폴더의 deploy_and_run.sh을 열어서 환경 변수를 설정합니다. 
     (2) 해당 Shell script를 원하는 클라이언트 갯수만큼 실행합니다. 
 
