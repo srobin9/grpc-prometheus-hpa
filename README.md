@@ -210,7 +210,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
 
     ![Client 실행 결과](./image/Client_running.png)
 
-3.  **다중 채널 및 Multiplex 테스트용 클라이언트 실행(Option 2):**
+4.  **다중 채널 및 Multiplex 테스트용 클라이언트 실행(Option 2):**
 
     다수의 Grpc 클라이언트에서 각각 3개의 grpc channel을 생성한 후 각 채널별로 10개의 스트림을 생성하여 서버측의 부하 분산을 테스트합니다. 
 
@@ -223,7 +223,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     ./deploy_and_run
     ```
 
-4.  **서버 POD 동작 확인:**
+5.  **서버 POD 동작 확인:**
     *   새 터미널을 열고 첫번째 서버 POD의 변화를 실시간으로 확인합니다.
     ```bash
     kubectl get pods -n grpc-test
@@ -236,7 +236,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
 
     ![HPA 수평 확장 후 gRPC 스트림이 서버 POD에 골고루 분배된 이후 GKE 콘솔 상태](./image/gke_console_last.png)
 
-5.  **HPA 동작 확인:**
+6.  **HPA 동작 확인:**
     *   새 터미널을 열고 HPA의 변화를 실시간으로 확인합니다.
     ```bash
     
@@ -245,7 +245,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     *   `TARGETS` 컬럼에 `현재 값 / 목표 값` (예: `8/5`)이 표시됩니다. 현재 값이 목표 값을 초과하면 `REPLICAS` 수가 1에서 점차 늘어나는 것을 볼 수 있습니다.
     ![HPA 동작 확인 결과](./image/hpa_status.png)
 
-6.  **Cloud Monitoring에서 메트릭 확인:**
+7.  **Cloud Monitoring에서 메트릭 확인:**
     *   Google Cloud Console에서 **Monitoring > Metrics Explorer**로 이동합니다.
     *   **PROMQL** 탭을 선택하고 다음 쿼리를 입력합니다.
         ```promql
@@ -264,7 +264,7 @@ Google Cloud Monitoring에서 수집한 Custom Metric을 HPA로 전달하기 위
     
     ![서버에서 메세지 처리 갯수가 초당 140~150을 유지하는 것을 확인](./image/otel_custom_metric_chart.png)
 
-7.  **테스트 종료 후 정리:**
+8.  **테스트 종료 후 정리:**
     ```bash
     # Namespace 전체를 삭제하여 모든 리소스를 정리합니다.
     kubectl delete ns grpc-test
